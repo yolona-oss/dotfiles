@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=State of Mind
+Exec="/mnt/extend/State of Mind/run-game.sh"
+Icon=/mnt/extend/State of Mind/data/icon.png
+Type=Application
+Categories=Game;
+StartupNotify=true
+Comment=Start State of Mind
+Comment[ru_RU]=Запустить State of Mind

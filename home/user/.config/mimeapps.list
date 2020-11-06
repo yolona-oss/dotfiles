@@ -1,0 +1,9 @@
+
+[Default Applications]
+application/pdf=zathura.desktop
+x-scheme-handler/https=luakit.desktop
+x-scheme-handler/http=luakit.desktop
+text/=vim.desktop
+image/=sxiv.desktop
+x-scheme-handler/tg=telegramdesktop.desktop
+tg=telegramdesktop.desktop

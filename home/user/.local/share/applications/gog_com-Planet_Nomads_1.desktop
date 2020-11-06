@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Value=1.0
+Type=Application
+Name=Planet Nomads
+GenericName=Planet Nomads
+Comment=Planet Nomads
+Icon=/home/xewii/games/Planet Nomads/support/icon.png
+Exec="/home/xewii/games/Planet Nomads/start.sh" ""
+Categories=Game;
+Path=/home/xewii/games/Planet Nomads
+

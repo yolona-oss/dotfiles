@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Value=1.0
+Type=Application
+Name=Hollow Knight
+GenericName=Hollow Knight
+Comment=Hollow Knight
+Icon=/home/xewii/games/Hollow Knight/support/icon.png
+Exec="/home/xewii/games/Hollow Knight/start.sh" ""
+Categories=Game;
+Path=/home/xewii/games/Hollow Knight
+

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Value=1.0
+Type=Application
+Name=Ruiner
+GenericName=Ruiner
+Comment=Ruiner
+Icon=/home/xewii/games/Ruiner/support/icon.png
+Exec="/home/xewii/games/Ruiner/start.sh" ""
+Categories=Game;
+Path=/home/xewii/games/Ruiner
+

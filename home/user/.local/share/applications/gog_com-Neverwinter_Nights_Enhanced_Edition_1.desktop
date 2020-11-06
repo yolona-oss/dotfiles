@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Value=1.0
+Type=Application
+Name=Neverwinter Nights: Enhanced Edition
+GenericName=Neverwinter Nights: Enhanced Edition
+Comment=Neverwinter Nights: Enhanced Edition
+Icon=/home/xewii/games/Neverwinter Nights Enhanced Edition/support/icon.png
+Exec="/home/xewii/games/Neverwinter Nights Enhanced Edition/start.sh" ""
+Categories=Game;
+Path=/home/xewii/games/Neverwinter Nights Enhanced Edition
+

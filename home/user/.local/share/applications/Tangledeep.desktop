@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Tangledeep
+Exec="/tmp/Tangledeep/run.sh"
+Icon=/tmp/Tangledeep/Tangledeep_Data/Resources/UnityPlayer.png
+Type=Application
+Categories=Game;
+StartupNotify=true
+Comment=Start Tangledeep
+Comment[ru_RU]=Запустить Tangledeep

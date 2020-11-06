@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Value=1.0
+Type=Application
+Name=This War Of Mine
+GenericName=This War Of Mine
+Comment=This War Of Mine
+Icon=/home/xewii/games/This War Of Mine/support/icon.png
+Exec="/home/xewii/games/This War Of Mine/start.sh" ""
+Categories=Game;
+Path=/home/xewii/games/This War Of Mine
+

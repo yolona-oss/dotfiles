@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Tacoma
+Exec="/home/data/Tacoma/run.sh"
+Icon=/home/data/Tacoma/Tacoma_Data/Resources/UnityPlayer.png
+Type=Application
+Categories=Game;
+StartupNotify=true
+Comment=Start Tacoma
+Comment[ru_RU]=Запустить Tacoma

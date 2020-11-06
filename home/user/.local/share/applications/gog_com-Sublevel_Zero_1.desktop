@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Value=1.0
+Type=Application
+Name=Sublevel Zero
+GenericName=Sublevel Zero
+Comment=Sublevel Zero
+Icon=/home/xewii/games/Sublevel Zero/support/icon.png
+Exec="/home/xewii/games/Sublevel Zero/start.sh" ""
+Categories=Game;
+Path=/home/xewii/games/Sublevel Zero
+

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Value=1.0
+Type=Application
+Name=Silence
+GenericName=Silence
+Comment=Silence
+Icon=/home/xewii/games/Silence/support/icon.png
+Exec="/home/xewii/games/Silence/start.sh" ""
+Categories=Game;
+Path=/home/xewii/games/Silence
+

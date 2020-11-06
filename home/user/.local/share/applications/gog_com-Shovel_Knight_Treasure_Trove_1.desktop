@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Value=1.0
+Type=Application
+Name=Shovel Knight: Treasure Trove
+GenericName=Shovel Knight: Treasure Trove
+Comment=Shovel Knight: Treasure Trove
+Icon=/home/xewii/games/Shovel Knight Treasure Trove/support/icon.png
+Exec="/home/xewii/games/Shovel Knight Treasure Trove/start.sh" ""
+Categories=Game;
+Path=/home/xewii/games/Shovel Knight Treasure Trove
+

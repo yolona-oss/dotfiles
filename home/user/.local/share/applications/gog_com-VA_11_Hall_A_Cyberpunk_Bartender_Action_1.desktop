@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Value=1.0
+Type=Application
+Name=VA-11 Hall-A: Cyberpunk Bartender Action
+GenericName=VA-11 Hall-A: Cyberpunk Bartender Action
+Comment=VA-11 Hall-A: Cyberpunk Bartender Action
+Icon=/home/xewii/games/VA 11 Hall A Cyberpunk Bartender Action/support/icon.png
+Exec="/home/xewii/games/VA 11 Hall A Cyberpunk Bartender Action/start.sh" ""
+Categories=Game;
+Path=/home/xewii/games/VA 11 Hall A Cyberpunk Bartender Action
+

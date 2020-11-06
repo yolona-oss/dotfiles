@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Value=1.0
+Type=Application
+Name=Duskers
+GenericName=Duskers
+Comment=Duskers
+Icon=/home/xewii/games/Duskers/support/icon.png
+Exec="/home/xewii/games/Duskers/start.sh" ""
+Categories=Game;
+Path=/home/xewii/games/Duskers
+

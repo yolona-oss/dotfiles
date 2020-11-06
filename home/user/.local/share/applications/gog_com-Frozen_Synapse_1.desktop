@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Value=1.0
+Type=Application
+Name=Frozen Synapse
+GenericName=Frozen Synapse
+Comment=Frozen Synapse
+Icon=/home/xewii/games/Frozen Synapse/support/icon.png
+Exec="/home/xewii/games/Frozen Synapse/start.sh" ""
+Categories=Game;
+Path=/home/xewii/games/Frozen Synapse
+

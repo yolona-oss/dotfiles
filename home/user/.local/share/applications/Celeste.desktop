@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Celeste
+Exec="/tmp/Celeste/run.sh"
+Icon=/tmp/Celeste/data/icon.png
+Type=Application
+Categories=Game;
+StartupNotify=true
+Comment=Start Celeste
+Comment[ru_RU]=Запустить Celeste

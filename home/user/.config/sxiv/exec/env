@@ -1,0 +1,13 @@
+_cut() {
+	end=${#1}
+	begin=$(( ${end} - ${2} ))
+	[ ${begin} -ge 1 ] && echo "...$(cut -c$(( ${begin} + 3 ))-${end} <<< "$1")" || echo $1
+}
+
+trash_dir="$HOME/.trash"
+dstf=/tmp/sxiv_dst_dir
+dst_default=$HOME/images/unsorted
+h=9
+w=100
+dialog_opts="--wmclass float --stdout --center"
+undo_stack=/tmp/sxiv_undo

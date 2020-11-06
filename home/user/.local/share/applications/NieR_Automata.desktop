@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Name=NieR:Automata
+GenericName=NieR:Automata
+Exec="/mnt/extend/Nier:Automata/start"
+Terminal=false
+Icon=/mnt/extend/Nier:Automata/icon.png
+Type=Application
+Categories=Game;
+StartupNotify=true
+Comment=Запустить NieR:Automata

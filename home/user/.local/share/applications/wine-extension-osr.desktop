@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=A Wine application
+MimeType=application/x-wine-extension-osr;
+Exec=env WINEPREFIX="/home/xewii/.wine" wine start /ProgIDOpen osu! %f
+NoDisplay=true
+StartupNotify=true

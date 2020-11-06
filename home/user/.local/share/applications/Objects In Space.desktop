@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Objects In Space
+Exec="/tmp/Objects In Space/run.sh"
+Icon=/tmp/Objects In Space/data/icon.png
+Type=Application
+Categories=Game;
+StartupNotify=true
+Comment=Start Objects In Space
+Comment[ru_RU]=Запустить Objects In Space

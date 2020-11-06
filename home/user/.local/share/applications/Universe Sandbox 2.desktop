@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Universe Sandbox 2
+Exec="/tmp/Universe Sandbox 2/run.sh"
+Icon=/tmp/Universe Sandbox 2/Universe Sandbox_Data/Resources/UnityPlayer.png
+Type=Application
+Categories=Game;
+StartupNotify=true
+Comment=Start Universe Sandbox 2
+Comment[ru_RU]=Запустить Universe Sandbox 2

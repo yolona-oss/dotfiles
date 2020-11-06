@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Value=1.0
+Type=Application
+Name=Human Resource Machine
+GenericName=Human Resource Machine
+Comment=Human Resource Machine
+Icon=/home/xewii/games/Human Resource Machine/support/icon.png
+Exec="/home/xewii/games/Human Resource Machine/start.sh" ""
+Categories=Game;
+Path=/home/xewii/games/Human Resource Machine
+

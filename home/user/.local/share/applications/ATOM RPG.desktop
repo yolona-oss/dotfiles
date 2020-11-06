@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=ATOM RPG
+Exec="/tmp/ATOM RPG/run.sh"
+Icon=/tmp/ATOM RPG/AtomRPG_Data/Resources/UnityPlayer.png
+Type=Application
+Categories=Game;
+StartupNotify=true
+Comment=Start ATOM RPG
+Comment[ru_RU]=Запустить ATOM RPG

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Value=1.0
+Type=Application
+Name=Cryptark
+GenericName=Cryptark
+Comment=Cryptark
+Icon=/home/xewii/games/Cryptark/support/icon.png
+Exec="/home/xewii/games/Cryptark/start.sh" ""
+Categories=Game;
+Path=/home/xewii/games/Cryptark
+

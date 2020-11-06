@@ -1,0 +1,96 @@
+#!/bin/bash
+
+wall_set() { #bad at setting background for the first time
+	if [ ! -f ~/.fehbg ]; then
+		echo -e '#!/bin/sh\nfeh --bg-fill '\''one'\'' '\''two'\''' > ~/.fehbg
+	fi
+	tmp=$(mktemp)
+	file="$(echo $file | sed 's/'\''/'\''\\\\'\'''\''/g')" #single quote handling
+	awk -v insert="$file" -v monitore="$(( $1 * 2 ))" -F \'*\'\
+		'BEGIN	{ static=2/(monitore/4) }
+		{
+			if ( $0 ~ /feh/ ) {
+				{ $monitore="\x27" insert "\x27" }
+				{ $static="\x27" $static"\x27" }
+				{ print }
+			} else
+				{ print }
+		}' ~/.fehbg > $tmp
+		chmod 744 $tmp
+		mv $tmp ~/.fehbg
+		~/./.fehbg
+}
+
+wall_set_1() {
+	tmp=$(mktemp)
+	opt="--bg-fill"
+	if [ -f ~/.fehbg ]; then
+		monitore="$(( $1 * 2 ))"
+                const=$(bc <<< "1/($monitore/4)" | cut -d. -f1)
+		wall="$(awk -v const="$const" -F \'*\' '/feh/ { print $const }' ~/.fehbg)"
+		[ -z "$wall" ] && wall="$file"
+		if [ $monitore -eq 1 ]; then
+			feh ${opt} "$file" "$wall"
+		else
+			feh ${opt} "$wall" "$file"
+		fi
+		rm $tmp
+	fi
+
+}
+
+source "$(dirname "${0}")/env"
+
+while read file; do
+	file="$(readlink -f "${file}")"
+	case "$1" in
+	"C-S") #set background to first monitor
+		#wall_set 1 
+		feh --no-fehbg --bg-fill "${file}"
+		;;
+	"C-s") #set background to second monitor
+		#useless now
+		wall_set 2
+		;;
+	"C-C")
+		name="primary"
+		cp "${file}" "${XDG_CACHE_HOME:-${HOME}/.cache}/wallpaper/primary"
+		file="${XDG_CACHE_HOME:-${HOME}/.cache}/wallpaper/primary"
+		wall_set 1
+		;;
+	"C-c") #copy path of current displayed file to clipboard
+		echo -n "${file}" | xclip -selection clipboard
+		;;
+	"C-d") #move current image to trash and push it's name to stack
+		mv "${file}" "${trash_dir}/$(basename "$file")"
+		#push $file to undo stack
+		cat ${undo_stack} > ${undo_stack_tmp}
+		echo "${file}" > ${undo_stack}
+		cat ${undo_stack_tmp} >> ${undo_stack}
+		rm ${undo_stack_tmp}
+		;;
+	"C-u") #move back the last deleted file
+		file="$(sed -n 1p $undo_stack)"
+		mv "$trash_dir/$(basename "$file")" "$file"
+		#pop up if undo succecfull
+		[ $? -eq 0 ] && sed -i '1d' $undo_stack #|| some error handler code
+		;;
+	"C-r") #rename current file
+		filename=$(_cut "$file" "$(( ${w} - 24 ))")
+		text="$filename to"
+		mv "$file" "$(dirname "$file")/$(Xdialog ${dialog_opts} --inputbox "$text" $h $w "$(basename "$file")")"
+		;;
+	"C-t") #change destination directory
+		dir="$(head -n1 $dstf)"
+		[[ -d "$dir" ]] && text="$dir" || text="$dst_default"
+		dir="$(Xdialog ${dialog_opts} --inputbox "last $text" $h $w "$(dirname "${text}")/" )"
+		(( $? == 0 )) && echo $dir > $dstf
+		;;
+	"C-m") #move current file to directory indicated by first line in $dstf or $dst_default if it's not declared
+		dst="$(head -n1 $dstf)"
+		[ -z "$dst" ] && dst="$dst_default"
+		[[ ! -d "$dst" ]] && mkdir "$dst"
+		mv "$file" "$dst"/ 
+		;;
+	esac
+done

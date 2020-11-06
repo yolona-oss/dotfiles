@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Value=1.0
+Type=Application
+Name=Enter the Gungeon
+GenericName=Enter the Gungeon
+Comment=Enter the Gungeon
+Icon=/home/xewii/games/Enter the Gungeon/support/icon.png
+Exec="/home/xewii/games/Enter the Gungeon/start.sh" ""
+Categories=Game;
+Path=/home/xewii/games/Enter the Gungeon
+

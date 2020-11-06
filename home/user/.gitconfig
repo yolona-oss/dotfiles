@@ -1,0 +1,7 @@
+[user]
+	name = siisgoo
+	email = siisgoo@mail.ru
+[core]
+	editor = vim
+[init]
+	defaultBranch = main

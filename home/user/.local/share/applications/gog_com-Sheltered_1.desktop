@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Value=1.0
+Type=Application
+Name=Sheltered
+GenericName=Sheltered
+Comment=Sheltered
+Icon=/home/xewii/games/Sheltered/support/icon.png
+Exec="/home/xewii/games/Sheltered/start.sh" ""
+Categories=Game;
+Path=/home/xewii/games/Sheltered
+

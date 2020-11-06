@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name[en_US]=HLD                                 # name of an app.
+GenericName=Hyper Light Drifter                    # longer name of an app.
+Exec=/home/game/Hyper\ Light\ Drifter/start.sh      #  command used to launch an app.
+Terminal=true                                  # whether an app requires to be run in a terminal.
+Icon[en_US]=   # location of icon file.
+Type=Application                                # type.
+Categories=Game        # categories in which this app should be listed.
+Comment[en_US]=starter                 # comment which appears as a tooltip.

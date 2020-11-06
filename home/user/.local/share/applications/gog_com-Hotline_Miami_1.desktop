@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Value=1.0
+Type=Application
+Name=Hotline Miami
+GenericName=Hotline Miami
+Comment=Hotline Miami
+Icon=/home/xewii/games/Beat'em up/Hotline Miami/support/icon.png
+Exec="/home/xewii/games/Beat'em up/Hotline Miami/start.sh" ""
+Categories=Game;
+Path=/home/xewii/games/Beat'em up/Hotline Miami
+

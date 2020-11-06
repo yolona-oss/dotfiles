@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Value=1.0
+Type=Application
+Name=Death Road to Canada
+GenericName=Death Road to Canada
+Comment=Death Road to Canada
+Icon=/home/xewii/games/Death Road to Canada/support/icon.png
+Exec="/home/xewii/games/Death Road to Canada/start.sh" ""
+Categories=Game;
+Path=/home/xewii/games/Death Road to Canada
+
