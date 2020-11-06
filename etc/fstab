@@ -1,0 +1,17 @@
+# /dev/sda5 LABEL=archlinux
+UUID=94e808ab-dd01-403b-b1e7-61813b18c30b	/         	ext4      	rw,noatime,commit=60 0 1
+
+# /dev/sda8
+UUID=19a231a4-bb9b-4b2f-998d-fc3f475b9ac4	/home     	ext4      	rw,noatime,commit=6	00 0
+
+# /dev/sda7
+UUID=E32A-8F02      	/boot     	vfat		rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro	0 2
+
+# /dev/sda2
+UUID=AE54-AE96      	/boot/efi 	vfat		rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro	0 2
+
+# /dev/sda6
+UUID=704bb10d-6aa7-4076-a273-fb4c0c9cbc15	none	swap	defaults  	0 0
+
+#/tmp
+tmpfs			/tmp		tmpfs		defaults,noexec,nosuid	0 0

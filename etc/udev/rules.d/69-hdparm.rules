@@ -1,0 +1,2 @@
+ACTION=="add", SUBSYSTEM=="block", KERNEL=="sd[a-z]", RUN+="/usr/bin/hdparm -q -S 12 /dev/sda"
+#ACTION=="add", SUBSYSTEM=="block', KERNEL=="sd[a-z]", RUN+="/usr/bin/blkid | /usr/bin/awk -F: '/a3b0dd7f-a4f3-4ef8-a968-56db9c713f6d/ {print $1}' |  sed -e 's/[0-9]\+$//' | xargs -r -n 1 hdparm -q -S 60"

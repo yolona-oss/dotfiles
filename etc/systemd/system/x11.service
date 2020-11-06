@@ -1,0 +1,8 @@
+[Unit]
+After=systemd-user-sessions.service
+
+[Service]
+ExecStart=/sbin/mingetty --autologin pumpurumprumpum --noclear tty7 38400
+
+[Install]
+WantedBy=multi-user.target
