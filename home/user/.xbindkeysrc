@@ -12,7 +12,7 @@
 "xbindkeys_show" 
   control+shift + q
 
-"xclip -o"
+"xclip -o -selection primary"
   contorl+shift + p
 
 "xclip -o -selection CLIPBOARD"

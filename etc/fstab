@@ -11,7 +11,7 @@ UUID=E32A-8F02      	/boot     	vfat		rw,relatime,fmask=0022,dmask=0022,codepage
 UUID=AE54-AE96      	/boot/efi 	vfat		rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro	0 2
 
 # /dev/sda6
-UUID=704bb10d-6aa7-4076-a273-fb4c0c9cbc15	none	swap	defaults  	0 0
+#UUID=704bb10d-6aa7-4076-a273-fb4c0c9cbc15	none	swap	defaults  	0 0
 
 #/tmp
-tmpfs			/tmp		tmpfs		defaults,noexec,nosuid	0 0
+tmpfs			/tmp		tmpfs		defaults,nosuid		0 0

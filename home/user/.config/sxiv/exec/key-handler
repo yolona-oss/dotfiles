@@ -1,5 +1,32 @@
 #!/bin/bash
 
+__dbdb()
+{
+	getlinkdir()
+	{
+		while read line; do
+			if [[ -d "$(realpath "${line}")" ]]; then
+				printf "$(basename "${line}")/\n"
+			fi
+		done <<< $(find "$(pwd)" -maxdepth 1 -type l)
+	}
+
+	cd $(cat "${dstf}")
+
+	chosen="placeholder"
+	lines=10
+
+	while [ ! -z "$chosen" ]; do
+		DIRs=$( ls -a1p | grep -P '^\w[^\$/]+/$' | awk -vRS="\n" -vORS="\t" '1')
+		LinkDIRs=$(getlinkdir)
+		prompt=$(_cut "$(pwd)" 20)
+		chosen=$(echo -e "$DIRs$LinkDIRs" | awk -vRS="\t" -vORS="\n" '1' | dmenu -l ${lines} -p ${prompt})
+		cd "$chosen"
+	done
+
+	echo "$(pwd)"
+}
+
 wall_set() { #bad at setting background for the first time
 	if [ ! -f ~/.fehbg ]; then
 		echo -e '#!/bin/sh\nfeh --bg-fill '\''one'\'' '\''two'\''' > ~/.fehbg
@@ -44,15 +71,15 @@ source "$(dirname "${0}")/env"
 while read file; do
 	file="$(readlink -f "${file}")"
 	case "$1" in
-	"C-S") #set background to first monitor
+	"C-s") #set background to first monitor
 		#wall_set 1 
 		feh --no-fehbg --bg-fill "${file}"
 		;;
-	"C-s") #set background to second monitor
-		#useless now
-		wall_set 2
-		;;
-	"C-C")
+	#"C-s") #set background to second monitor
+	#	#useless now
+	#	wall_set 2
+	#	;;
+	"C-S")
 		name="primary"
 		cp "${file}" "${XDG_CACHE_HOME:-${HOME}/.cache}/wallpaper/primary"
 		file="${XDG_CACHE_HOME:-${HOME}/.cache}/wallpaper/primary"
@@ -62,9 +89,9 @@ while read file; do
 		echo -n "${file}" | xclip -selection clipboard
 		;;
 	"C-d") #move current image to trash and push it's name to stack
-		mv "${file}" "${trash_dir}/$(basename "$file")"
-		#push $file to undo stack
-		cat ${undo_stack} > ${undo_stack_tmp}
+		# mv "${file}" "${trash_dir}/$(basename "$file")" # without trash-cli
+		trash-put "${file}"
+		cat ${undo_stack} > ${undo_stack_tmp} #push $file to undo stack
 		echo "${file}" > ${undo_stack}
 		cat ${undo_stack_tmp} >> ${undo_stack}
 		rm ${undo_stack_tmp}
@@ -83,7 +110,8 @@ while read file; do
 	"C-t") #change destination directory
 		dir="$(head -n1 $dstf)"
 		[[ -d "$dir" ]] && text="$dir" || text="$dst_default"
-		dir="$(Xdialog ${dialog_opts} --inputbox "last $text" $h $w "$(dirname "${text}")/" )"
+		# dir="$(Xdialog ${dialog_opts} --inputbox "last $text" $h $w "$(dirname "${text}")/" )"
+		dir=$(__dbdb)
 		(( $? == 0 )) && echo $dir > $dstf
 		;;
 	"C-m") #move current file to directory indicated by first line in $dstf or $dst_default if it's not declared
@@ -91,6 +119,18 @@ while read file; do
 		[ -z "$dst" ] && dst="$dst_default"
 		[[ ! -d "$dst" ]] && mkdir "$dst"
 		mv "$file" "$dst"/ 
+		;;
+	"C-C")
+		dst="$(head -n1 $dstf)"
+		[ -z "$dst" ] && dst="$dst_default"
+		[[ ! -d "$dst" ]] && mkdir "$dst"
+		cp "$file" "$dst"/ 
+		;;
+	"C-p") # play in mpv
+		base=$(basename "${file%.*}")
+		dir=$(dirname "$(dirname "${file}")")
+		echo ${dir}/${base}
+		mpv "${dir}/${base}"
 		;;
 	esac
 done

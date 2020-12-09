@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=Streets of Rogue
-Exec="/tmp/Streets of Rogue/run.sh"
-Icon=/tmp/Streets of Rogue/StreetsOfRogueLinux_Data/Resources/UnityPlayer.png
-Type=Application
-Categories=Game;
-StartupNotify=true
-Comment=Start Streets of Rogue
-Comment[ru_RU]=Запустить Streets of Rogue

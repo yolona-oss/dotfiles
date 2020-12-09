@@ -1,12 +1,12 @@
-_cut() {
+_cut() { # print shorted string by ${2} param
 	end=${#1}
 	begin=$(( ${end} - ${2} ))
-	[ ${begin} -ge 1 ] && echo "...$(cut -c$(( ${begin} + 3 ))-${end} <<< "$1")" || echo $1
+	[ ${begin} -ge 1 ] && echo "..$(cut -c$(( ${begin} + 2 ))-${end} <<< "$1")" || echo $1
 }
 
-trash_dir="$HOME/.trash"
+trash_dir="$HOME/.local/share/Trash"
 dstf=/tmp/sxiv_dst_dir
-dst_default=$HOME/images/unsorted
+dst_default=$XDG_PICTURES_DIR
 h=9
 w=100
 dialog_opts="--wmclass float --stdout --center"

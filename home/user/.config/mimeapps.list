@@ -7,3 +7,4 @@ text/=vim.desktop
 image/=sxiv.desktop
 x-scheme-handler/tg=telegramdesktop.desktop
 tg=telegramdesktop.desktop
+video/=mpv.desktop

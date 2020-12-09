@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=FAR - Lone Sails
-Exec="/tmp/FAR - Lone Sails/run.sh"
-Icon=/tmp/FAR - Lone Sails/FarLoneSails_Data/Resources/UnityPlayer.png
-Type=Application
-Categories=Game;
-StartupNotify=true
-Comment=Start FAR - Lone Sails
-Comment[ru_RU]=Запустить FAR - Lone Sails

@@ -1,14 +1,12 @@
 #~/.bash_profile
 
-if [[ ! ${DISPLAY} && ${XDG_VTNR} == 7 ]] ; then
+if [[ -z ${DISPLAY} && ${XDG_VTNR} == 7 ]] ; then
     exec startx &> /dev/null
 fi
 
-test -f ~/.bashrc && . ~/.bashrc
-
-if test -d ~/profile.d; then
-        for profile in ~/profile.d/*.sh; do
-                test -r "$profile" && . "$profile"
+if test -d ~/.profile.d; then
+        for profile in ~/.profile.d/*.sh; do
+                . "$profile"
         done
         unset profile
 fi

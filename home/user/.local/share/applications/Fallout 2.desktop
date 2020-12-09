@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=Fallout 2
-Comment=Play this game on Steam
-Exec=steam steam://rungameid/38410
-Icon=steam_icon_38410
-Terminal=false
-Type=Application
-Categories=Game;

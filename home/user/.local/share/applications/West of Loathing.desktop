@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=West of Loathing
-Exec="/home/xewii/West of Loathing/run-game.sh"
-Icon=/home/xewii/West of Loathing/WoL_Data/Resources/UnityPlayer.png
-Type=Application
-Categories=Game;
-StartupNotify=true
-Comment=Start West of Loathing
-Comment[ru_RU]=Запустить West of Loathing

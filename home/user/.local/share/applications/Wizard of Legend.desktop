@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=Wizard of Legend
-Exec="/tmp/Wizard of Legend/run.sh"
-Icon=/tmp/Wizard of Legend/WizardOfLegend_Data/Resources/UnityPlayer.png
-Type=Application
-Categories=Game;
-StartupNotify=true
-Comment=Start Wizard of Legend
-Comment[ru_RU]=Запустить Wizard of Legend

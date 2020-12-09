@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=Beholder 2
-Exec="/tmp/Beholder 2/run.sh"
-Icon=/tmp/Beholder 2/Beholder2_Data/Resources/UnityPlayer.png
-Type=Application
-Categories=Game;
-StartupNotify=true
-Comment=Start Beholder 2
-Comment[ru_RU]=Запустить Beholder 2

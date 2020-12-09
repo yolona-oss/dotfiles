@@ -1,9 +1,0 @@
-[Unit]
-Description=Change login tty number.
-
-[Service]
-Type=idle
-ExecStart=/usr/bin/chvt 7
-
-[Install]
-WantedBy=multi-user.target

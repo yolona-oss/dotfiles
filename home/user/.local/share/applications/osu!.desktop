@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=osu!
-Icon=osu!.png
-Exec=osu %u
-StartupWMClass=osu!.exe
-Categories=Game;
-MimeType=x-scheme-handler/discord-367827983903490050;x-scheme-handler/osu;

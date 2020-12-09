@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=Sally Face
-Exec="/tmp/Sally Face/run.sh"
-Icon=/tmp/Sally Face/Sally Face_Data/Resources/UnityPlayer.png
-Type=Application
-Categories=Game;
-StartupNotify=true
-Comment=Start Sally Face
-Comment[ru_RU]=Запустить Sally Face

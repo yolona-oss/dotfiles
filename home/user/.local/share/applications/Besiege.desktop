@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=Besiege
-Exec="/tmp/Besiege/run.sh"
-Icon=/tmp/Besiege/Besiege_Data/Resources/UnityPlayer.png
-Type=Application
-Categories=Game;
-StartupNotify=true
-Comment=Start Besiege
-Comment[ru_RU]=Запустить Besiege

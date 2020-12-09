@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=Distrust
-Exec="/tmp/Distrust/run.sh"
-Icon=/tmp/Distrust/Distrust_Data/Resources/UnityPlayer.png
-Type=Application
-Categories=Game;
-StartupNotify=true
-Comment=Start Distrust
-Comment[ru_RU]=Запустить Distrust
