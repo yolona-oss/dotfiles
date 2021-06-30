@@ -34,6 +34,7 @@ alias seeer="journalctl -p 3 -xb"
 # Network
 alias p4='ping 4.2.2.2 -c 4'	# Check Internet connection
 alias localip=$(ip addr | grep -w inet | gawk '{if (NR==2) {$0=$2; gsub(/\//," "); print $1;}}')
+# alias netcat-reciver='netcat -l -p 7000 | pv | tar x'
 
 # Language translation
 alias enru="trans -e google -from en -to ru"
@@ -51,7 +52,6 @@ y=$(xrandr | grep "\*+" | cut -dx -f2 | cut -d' ' -f 1)
 w="$(echo "$x * 0.70" | bc -l | cut -d. -f1)"
 h="$(echo "$y * 0.69" | bc -l | cut -d. -f1)"
 alias sxiv="sxiv -a -g ${w}x${h}+$((x/2 - w/2))+$((y/2 - h/2))" # 2>> /tmp/sxiv_log"
-# alias sxiv="xdg-open"
 unset x y w h
 
 # Pulsemixer
@@ -59,7 +59,7 @@ alias pulsemixer="pulsemixer --color 1 --no-mouse"
 
 # Video viewing
 # MPV
-alias mpv="mpv --volume=30 --geometry="70%x69%""
+# alias mpv="mpv --volume=30 --geometry="70%x69%""
 
 # PacMan
 # browser for pkgs

@@ -1,24 +1,26 @@
+#!/usr/bin/env bash
 # ~/.bashrc
 
 # BASH interactitity check
 [[ $- != *i* ]] && return
 
 # Sourcing enviroment variables
-source $HOME/.config/environment
+source "$HOME"/.config/environment
 
 # WINEPREFIX path
-[[ -d "${HOME}/games" ]] && export WINEPREFIX="${HOME}/games/.wine"
+[[ -d "${HOME}"/games ]] && export WINEPREFIX="${HOME}/games/.wine"
 
 # Appendig PATH
-[[ ! $PATH =~ "$HOME/.local/bin" ]] && export PATH+=":$HOME/.local/bin"
+[[ ! "$PATH" =~ "$HOME"/.local/bin ]] && export PATH+=":$HOME/.local/bin"
 
 # Merging another startup scripts
-if [[ -d "$HOME/.bash" ]]
+if [[ -d "$HOME"/.bash ]]
 then
-	for scrpt in $HOME/.bash/*.sh
+	for scrpt in "$HOME"/.bash/*.sh
 	do
 		source $scrpt
 	done
+	unset scrpt
 fi
 
 # XDG variables declaration

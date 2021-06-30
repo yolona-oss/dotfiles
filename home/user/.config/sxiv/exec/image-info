@@ -1,5 +1,14 @@
-#!/bin/sh
+#!/bin/bash
+#Requrements:
+#1. imagemagick
+#2. exiv2
+#3. coreutils
+
 source "$(dirname "$0")/env"
+
+exec 2>>${LOG_FILE}
+
+control_size $LOG_FILE $MAX_LOG_SIZE
 
 s=" :: "
 
@@ -10,6 +19,7 @@ geometry=$(identify -format '%wx%h' "$1[0]")
 tags=$(exiv2 -q pr "$1" 2>/dev/null | awk '$1~"Keywords" { printf("%s,", $4); }')
 tags=${tags%,}
 
-dstdir="$(head $dstf 2>/dev/null || echo N/A)"
+dstdir=$(tail -n1 $dstf)
+[[ $? != 0 ]] && dstdir="N/A"
 
 echo "${filesize}${s}${geometry}${tags:+$s}${tags}${s}${filename}${s}${dstdir}"

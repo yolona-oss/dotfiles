@@ -1,0 +1,1 @@
+SUBSYSTEM=="net", ACTION=="add", ATTRS{idVendor}=="148f", ATTRS{idProduct}=="2870", NAME="wlan0"

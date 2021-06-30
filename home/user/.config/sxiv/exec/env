@@ -1,3 +1,22 @@
+#!/bin/bash
+
+control_size()
+{
+	if (( $(wc -l < $1) > $2 )); then
+		sed '1d' $1 > ${1}.1
+		mv ${1}.1 $1
+
+		rm -f ${1}.1
+	fi
+}
+
+countchar()
+{
+	    while IFS= read -r i; do
+			printf "%s" "$i" | tr -dc "$1" | wc -m
+		done
+}
+
 _cut() { # print shorted string by ${2} param
 	end=${#1}
 	begin=$(( ${end} - ${2} ))
@@ -5,9 +24,37 @@ _cut() { # print shorted string by ${2} param
 }
 
 trash_dir="$HOME/.local/share/Trash"
-dstf=/tmp/sxiv_dst_dir
-dst_default=$XDG_PICTURES_DIR
-h=9
-w=100
-dialog_opts="--wmclass float --stdout --center"
-undo_stack=/tmp/sxiv_undo
+if [[ ! -d $trash_dir ]]; then
+	mkdir -p $trash_dir
+fi
+
+max_mon=2
+
+LOG_FILE=/tmp/sxiv.log
+MAX_LOG_SIZE=100
+if [[ ! -f $LOG_FILE ]]; then
+	>$LOG_FILE
+fi
+
+WALLPAPER_STORE="${XDG_CACHE_HOME:-${HOME}/.cache}/wallpaper"
+if [[ ! -d "$WALLPAPER_STORE" ]]; then
+	mkdir -p "$WALLPAPER_STORE"
+fi
+
+if [[ -d ${XDG_PICTURES_DIR} ]]; then
+	dst_default=${XDG_PICTURES_DIR}
+elif [[ -d ${HOME}/images ]]; then
+	dst_default=${HOME}/images
+fi
+
+dstf=/tmp/sxiv.mv_path
+MAX_DST=10
+if [[ ! -s ${dstf} ]]; then
+	echo "${dst_default}" > /tmp/sxiv.mv_path
+fi
+
+undo_stack=/tmp/sxiv.rm_undo
+MAX_UNDO=16
+if [[ ! -f $undo_stack ]]; then
+	>$undo_stack
+fi

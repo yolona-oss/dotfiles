@@ -12,3 +12,14 @@ ipif() {
     fi
     echo
 }
+
+netcat-send()
+{
+	tar cf - $1 | pv | netcat 192.168.1.${2} ${3}
+}
+
+netcat-reciver()
+{
+	echo "netcat revicer started"
+	netcat -l -p ${1} | pv | tar x
+}

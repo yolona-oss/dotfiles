@@ -1,4 +1,11 @@
 #!/bin/bash
+#Requered:
+#1. feh (wallpaper setup)
+#2. dmenu (input text)
+#3. base, linux-utils, bash
+#4. gawk
+#5. sed
+#6. findutils
 
 __dbdb()
 {
@@ -11,7 +18,7 @@ __dbdb()
 		done <<< $(find "$(pwd)" -maxdepth 1 -type l)
 	}
 
-	cd $(cat "${dstf}")
+	cd $(tail -n1 "${dstf}")
 
 	chosen="placeholder"
 	lines=10
@@ -27,13 +34,17 @@ __dbdb()
 	echo "$(pwd)"
 }
 
-wall_set() { #bad at setting background for the first time
+# setting wallpaper with feh, ${1} arg - monitor number
+wall_set_depr() { #bad at setting background for the first time
+	swap=$(mktemp)
+	#single quote handling
+	file=$(sed 's/'\''/'\''\\\\'\'''\''/g' <<< $file)
+
 	if [ ! -f ~/.fehbg ]; then
 		echo -e '#!/bin/sh\nfeh --bg-fill '\''one'\'' '\''two'\''' > ~/.fehbg
 	fi
-	tmp=$(mktemp)
-	file="$(echo $file | sed 's/'\''/'\''\\\\'\'''\''/g')" #single quote handling
-	awk -v insert="$file" -v monitore="$(( $1 * 2 ))" -F \'*\'\
+
+	awk -v insert="$file" -v monitore=$(( $1 * 2 )) -F \'*\' \
 		'BEGIN	{ static=2/(monitore/4) }
 		{
 			if ( $0 ~ /feh/ ) {
@@ -42,94 +53,165 @@ wall_set() { #bad at setting background for the first time
 				{ print }
 			} else
 				{ print }
-		}' ~/.fehbg > $tmp
-		chmod 744 $tmp
-		mv $tmp ~/.fehbg
-		~/./.fehbg
+		}' ~/.fehbg > $swap
+
+	chmod 744 $swap
+	mv $swap ~/.fehbg
+	~/./.fehbg 2>/dev/null
 }
 
-wall_set_1() {
-	tmp=$(mktemp)
-	opt="--bg-fill"
-	if [ -f ~/.fehbg ]; then
-		monitore="$(( $1 * 2 ))"
-                const=$(bc <<< "1/($monitore/4)" | cut -d. -f1)
-		wall="$(awk -v const="$const" -F \'*\' '/feh/ { print $const }' ~/.fehbg)"
-		[ -z "$wall" ] && wall="$file"
-		if [ $monitore -eq 1 ]; then
-			feh ${opt} "$file" "$wall"
-		else
-			feh ${opt} "$wall" "$file"
+wall_set() {
+	local opt="--no-fehbg --bg-fill"
+
+	create_fehbg()
+	{
+		printf "#!/bin/sh\nfeh $opt 'one' 'two'" # > ~/.fehbg
+		exit
+		if (( ! $? )); then
+			echo "Cant create fehbg file"
+			return -1
 		fi
-		rm $tmp
+
+		return 0
+	}
+
+	set()
+	{
+		if (( $(countchar \' <<< $(awk '! /^feh/ {next} { print $0 }' ~/.fehbg)) != 4 )); then
+			create_fehbg
+			if (( $? != 0 )); then
+				return
+			fi
+		fi
+
+		local save_sect=$(( (3 - $mon) * 2 ))
+		local save="$(awk -v n="$save_sect" -F \'*\' \
+			'! /^feh/ {next} { print $n }' ~/.fehbg)"
+
+		# same files for prim and second monitors
+		if [[ -z "$save" ]]; then
+			save="$file"
+		fi
+
+		if [[ -n $1 ]]; then
+			feh ${opt} "$file"
+			return
+		elif (( $mon == 1 )); then
+			str="feh ${opt} '$file' '$save'"
+		elif (( $mon == 2 )); then
+			str="feh ${opt} '$save' '$file'"
+		fi
+
+		echo "$str" > ~/.fehbg
+		~/./.fehbg
+
+		return
+	}
+
+	local mon=$1
+
+	#single quote handling
+	local file=$(sed 's/'\''/'\''\\\\'\'''\''/g' <<< $file)
+
+	if (( $mon < 0 )) || (( $mon > $max_mon )); then
+		echo "Selected monitor not in range 0-$mon"
+		return
 	fi
 
+	if [[ $1 == 0 ]]; then
+		write=0
+	fi
+	
+	if [[ ! -f ~/.fehbg ]]; then
+		create_fehbg
+		if (( $? != 0 )); then
+			return
+		fi
+	fi
+	
+	set $write
 }
 
 source "$(dirname "${0}")/env"
 
+exec 2>>${LOG_FILE}
+
 while read file; do
 	file="$(readlink -f "${file}")"
+
 	case "$1" in
 	"C-s") #set background to first monitor
-		#wall_set 1 
-		feh --no-fehbg --bg-fill "${file}"
+		wall_set 0
 		;;
-	#"C-s") #set background to second monitor
-	#	#useless now
-	#	wall_set 2
-	#	;;
 	"C-S")
-		name="primary"
-		cp "${file}" "${XDG_CACHE_HOME:-${HOME}/.cache}/wallpaper/primary"
-		file="${XDG_CACHE_HOME:-${HOME}/.cache}/wallpaper/primary"
+		cp "${file}" "${WALLPAPER_STORE}/primary"
+		file="$WALLPAPER_STORE/primary"
+
 		wall_set 1
 		;;
 	"C-c") #copy path of current displayed file to clipboard
 		echo -n "${file}" | xclip -selection clipboard
 		;;
 	"C-d") #move current image to trash and push it's name to stack
+		control_size $undo_stack $MAX_UNDO
+
 		# mv "${file}" "${trash_dir}/$(basename "$file")" # without trash-cli
 		trash-put "${file}"
-		cat ${undo_stack} > ${undo_stack_tmp} #push $file to undo stack
-		echo "${file}" > ${undo_stack}
-		cat ${undo_stack_tmp} >> ${undo_stack}
-		rm ${undo_stack_tmp}
+
+		echo "${file}" >> ${undo_stack}
+
+		rm -f ${undo_stack}.1
 		;;
 	"C-u") #move back the last deleted file
-		file="$(sed -n 1p $undo_stack)"
+		file="$(tail -n1 $undo_stack)"
 		mv "$trash_dir/$(basename "$file")" "$file"
-		#pop up if undo succecfull
-		[ $? -eq 0 ] && sed -i '1d' $undo_stack #|| some error handler code
+
+		if [[ $? -eq 0 ]]; then
+			cp $undo_stack ${undo_stack}.1
+			sed '$ d' ${undo_stack}.1 > $undo_stack
+
+			rm -f ${undo_stack}.1
+		fi
 		;;
 	"C-r") #rename current file
 		filename=$(_cut "$file" "$(( ${w} - 24 ))")
 		text="$filename to"
+
+		#TODO: rewrtie with dmenu
 		mv "$file" "$(dirname "$file")/$(Xdialog ${dialog_opts} --inputbox "$text" $h $w "$(basename "$file")")"
 		;;
 	"C-t") #change destination directory
-		dir="$(head -n1 $dstf)"
+		control_size $dstf $MAX_DST
+
+		dir="$(tail -n1 $dstf)"
 		[[ -d "$dir" ]] && text="$dir" || text="$dst_default"
-		# dir="$(Xdialog ${dialog_opts} --inputbox "last $text" $h $w "$(dirname "${text}")/" )"
 		dir=$(__dbdb)
-		(( $? == 0 )) && echo $dir > $dstf
+		(( $? == 0 )) && echo $dir >> $dstf
+		;;
+	"C-T") #switch last dst directory
+		control_size $dstf $MAX_DST
+
+		prev=$(tail -n2 $dstf | head -n1)
+
+		echo "${prev}" >> "${dstf}"
 		;;
 	"C-m") #move current file to directory indicated by first line in $dstf or $dst_default if it's not declared
-		dst="$(head -n1 $dstf)"
+		dst="$(tail -n1 $dstf)"
 		[ -z "$dst" ] && dst="$dst_default"
 		[[ ! -d "$dst" ]] && mkdir "$dst"
 		mv "$file" "$dst"/ 
 		;;
 	"C-C")
-		dst="$(head -n1 $dstf)"
-		[ -z "$dst" ] && dst="$dst_default"
+		dst="$(tail -n1 $dstf)"
+
 		[[ ! -d "$dst" ]] && mkdir "$dst"
+
 		cp "$file" "$dst"/ 
 		;;
 	"C-p") # play in mpv
 		base=$(basename "${file%.*}")
 		dir=$(dirname "$(dirname "${file}")")
-		echo ${dir}/${base}
+
 		mpv "${dir}/${base}"
 		;;
 	esac

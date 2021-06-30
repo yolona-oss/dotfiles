@@ -26,7 +26,7 @@ case $group in
         case "$device" in
             AC*|ACAD|ADP0)
 				backlight_name="intel_backlight"
-				max_bri=$(cat /sys/class/backlight/${backlight_name}/max_brightness)
+				max_bri=$(</sys/class/backlight/${backlight_name}/max_brightness)
                 case "$value" in
                     00000000)
 						log "switching to power.bat power profile"

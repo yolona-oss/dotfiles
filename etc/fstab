@@ -1,17 +1,25 @@
-# /dev/sda5 LABEL=archlinux
-UUID=94e808ab-dd01-403b-b1e7-61813b18c30b	/         	ext4      	rw,noatime,commit=60 0 1
+# Static information about the filesystems.
+# See fstab(5) for details.
 
-# /dev/sda8
-UUID=19a231a4-bb9b-4b2f-998d-fc3f475b9ac4	/home     	ext4      	rw,noatime,commit=6	00 0
+# <file system> <dir> <type> <options> <dump> <pass>
+# /dev/sdb2 LABEL=Archlinux
+UUID=d465c911-45db-40a9-a308-bb351c4d45af	/         	ext4      	rw,noatime,discard	0 1
 
-# /dev/sda7
-UUID=E32A-8F02      	/boot     	vfat		rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro	0 2
+# /dev/sdb1 LABEL=EFI
+UUID=C5F6-8E79      				/boot     	vfat      	rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro	0 2
+
+# /dev/sda3 LABEL=var
+UUID=53c22b4f-83b3-4dc5-8cc6-1caa564513b5	/var      	ext4      	rw,relatime		0 0
+
+# /dev/sdb4 LABEL=home
+UUID=a647cb8f-7e17-4049-84f7-10e455a76124	/home     	ext4      	rw,noatime,discard	0 0
 
 # /dev/sda2
-UUID=AE54-AE96      	/boot/efi 	vfat		rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro	0 2
+UUID=a3b0dd7f-a4f3-4ef8-a968-56db9c713f6d	/home/data	ext4		rw,noatime,commit=60,barrier=0		0 0
 
-# /dev/sda6
-#UUID=704bb10d-6aa7-4076-a273-fb4c0c9cbc15	none	swap	defaults  	0 0
+# /dev/sdc2 LABEL=game
+UUID=db9b57ff-e96f-4189-9800-a603271785d7	/usr/local/games ext4		rw,noatime,data=writeback,commit=60,barrier=0		0 0
+#,notail
 
 #/tmp
-tmpfs			/tmp		tmpfs		defaults,nosuid		0 0
+tmpfs						/tmp		tmpfs		defaults,nosuid		0 0
