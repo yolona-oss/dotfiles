@@ -1,25 +1,14 @@
-# Static information about the filesystems.
-# See fstab(5) for details.
+# /dev/nvme0n1p2 LABEL=archlinux
+UUID=bf5c57e9-678e-48fa-b8b8-ca6239952d91	/         	f2fs      	rw,noatime,discard,lazytime,background_gc=on,no_heap,inline_xattr,inline_data,inline_dentry,flush_merge,extent_cache,mode=adaptive,active_logs=6,alloc_mode=default,nocheckpoint_merge,fsync_mode=posix		0 1
 
-# <file system> <dir> <type> <options> <dump> <pass>
-# /dev/sdb2 LABEL=Archlinux
-UUID=d465c911-45db-40a9-a308-bb351c4d45af	/         	ext4      	rw,noatime,discard	0 1
+# /dev/nvme0n1p1
+UUID=7502-9B0A      	/boot     	vfat      	rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=ascii,shortname=mixed,utf8,errors=remount-ro	0 2
 
-# /dev/sdb1 LABEL=EFI
-UUID=C5F6-8E79      				/boot     	vfat      	rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro	0 2
+# /dev/nvme0n1p3 LABEL=home
+UUID=ab0b2275-b723-4758-ab08-2ebedce0b1a4	/home     	f2fs      	rw,noatime,discard,lazytime,background_gc=on,no_heap,inline_xattr,inline_data,inline_dentry,flush_merge,extent_cache,mode=adaptive,active_logs=6,alloc_mode=default,nocheckpoint_merge,fsync_mode=posix		0 2
 
-# /dev/sda3 LABEL=var
-UUID=53c22b4f-83b3-4dc5-8cc6-1caa564513b5	/var      	ext4      	rw,relatime		0 0
-
-# /dev/sdb4 LABEL=home
-UUID=a647cb8f-7e17-4049-84f7-10e455a76124	/home     	ext4      	rw,noatime,discard	0 0
-
-# /dev/sda2
-UUID=a3b0dd7f-a4f3-4ef8-a968-56db9c713f6d	/home/data	ext4		rw,noatime,commit=60,barrier=0		0 0
-
-# /dev/sdc2 LABEL=game
-UUID=db9b57ff-e96f-4189-9800-a603271785d7	/usr/local/games ext4		rw,noatime,data=writeback,commit=60,barrier=0		0 0
-#,notail
+# /dev/sda1
+UUID=db2369d5-ad00-49a9-9450-4b7c15bc295f	/home/data	ext4      	rw,noatime	0 2
 
 #/tmp
 tmpfs						/tmp		tmpfs		defaults,nosuid		0 0

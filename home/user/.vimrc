@@ -1,5 +1,5 @@
 set nocompatible
-filetype off
+" filetype off
 
 "###################"
 "	PLUGGIN SETUP   "
@@ -22,22 +22,31 @@ call plug#begin('~/.vim/plugged')
 	"" Colorscheme
 	Plug 'vim-scripts/AfterColors.vim'
 	Plug 'rafi/awesome-vim-colorschemes'
+	Plug 'sonph/onehalf', { 'rtp': 'vim' }
+	"" Icons support
+	Plug 'ryanoasis/vim-devicons'
 	"" Fonts
 	Plug 'powerline/fonts'
+	" Plug 'https://github.com/ryanoasis/nerd-fonts'
 
 	" Text completing
 	Plug 'ycm-core/YouCompleteMe'
 	" Plug 'justmao945/vim-clang'
 	Plug 'tpope/vim-commentary'
 	Plug 'm-pilia/vim-pkgbuild'
-	" Plug 'xavierd/clang_complete'
-	" Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+	" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	" Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 	" Plug 'neoclide/coc-java', {'do': 'yarn install --frozen-lockfile'}
+	Plug 'https://github.com/tpope/vim-surround'
+	Plug 'https://github.com/octol/vim-cpp-enhanced-highlight'
+
+	" Spell check
+	" Plug 'https://github.com/scrooloose/syntastic'
 
 	" Naviration
 	Plug 'ctrlpvim/ctrlp.vim'
 	Plug 'preservim/nerdtree'
+	Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 	Plug 'vim-scripts/bufkill.vim'
 	Plug 'jreybert/vimagit'
 	" Plug 'bling/vim-bufferline'
@@ -71,8 +80,10 @@ set number
 set relativenumber
 syntax on
 set viminfo='20,<100,:100,%,n~/.vim/viminfo
-set encoding=utf-8
-set fileencoding=utf-8
+set encoding=UTF-8
+set fileencoding=UTF-8
+set guifont=Anonymous\ Pro\ Nerd\ Font\ Complete\ Mono\ 12
+" set guifont=DroidSansMono\ Nerd\ Font\ 11
 set exrc	"use local ./vimrc for each dir	
 set secure	"disallow to run autocmd in local ./vimrc
 set smartcase	"smart search
@@ -159,10 +170,11 @@ map <c-n> :NERDTreeToggle<CR>
 
 """let &rtp .= ',' . expand( '<sfile>:p:h' )
 
-" let g:ycm_min_num_of_chars_for_completion = 1
+let g:ycm_min_num_of_chars_for_completion = 1
 " let g:ycm_keep_logfiles = 1
 " let g:ycm_log_level = 'debug'
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+" let g:ycm_show_diagnostics_ui = 0
 
 "######################
 "   4.2 NERDTree
@@ -180,18 +192,18 @@ endif
 " Closing NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-autocmd BufEnter * lcd %:p:h
+" autocmd BufEnter * lcd %:p:h
 let g:NERDTreeChDirMode = 2
 
 let NERDTreeShowHidden=0
-let NERDTreeShowBookmarks=0
+let NERDTreeShowBookmarks=1
 let NERDTreeMinimalUI=1
 
-let g:NERDTreeFileExtensionHighlightFullName = 1
-let g:NERDTreeExactMatchHighlightFullName = 1
-let g:NERDTreePatternMatchHighlightFullName = 1
-let g:NERDTreeHighlightFolders = 1		" enables folder icon highlighting using exact match
-let g:NERDTreeHighlightFoldersFullName = 1	" highlights the folder name
+" let g:NERDTreeFileExtensionHighlightFullName = 1
+" let g:NERDTreeExactMatchHighlightFullName = 1
+" let g:NERDTreePatternMatchHighlightFullName = 1
+" let g:NERDTreeHighlightFolders = 1		" enables folder icon highlighting using exact match
+" let g:NERDTreeHighlightFoldersFullName = 1	" highlights the folder name
 
 " NERDTress File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
@@ -200,8 +212,8 @@ function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
 endfunction
 
 " Dir arrows
-let g:NERDTreeDirArrowExpandable = '❐ ' "▶
-let g:NERDTreeDirArrowCollapsible = '⊿ '
+let g:NERDTreeDirArrowExpandable = '▶' "❐
+let g:NERDTreeDirArrowCollapsible = '▼' "⊿
 let NERDTreeNodeDelimiter="😀"
 
 let NERDTreeIgnore=[
@@ -226,7 +238,7 @@ let g:auto_save_silent = 1
 "   4.4 CtrlP   
 "###################
 
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+set wildignore+=*tmp*,*.so,*.swp,*.zip
 let g:ctrlp_user_command = 'find %s -type f'
 
 " Ignore files in .gitignore
@@ -243,9 +255,9 @@ let g:ctrlp_custom_ignore = {
 "########################
 
 if argc() == 0
-		colorscheme abstract "molokai "heppy_hacking "meta5 "abstract "onedark "pablo "darkblue
+		colorscheme onedark
 else
-		colorscheme pablo
+		colorscheme happy_hacking
 endif
 
 "##########################
@@ -338,4 +350,37 @@ let g:airline#extensions#ycm#enabled = 1
 "let g:UltiSnipsExpandTrigger="<tab>"
 "let g:UltiSnipsJumpForwardTrigger="<c-b>"
 "let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+"#######
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+let g:cpp_posix_standard = 1
+let g:cpp_experimental_simple_template_highlight = 1
+let g:cpp_concepts_highlight = 1
+
+"#########
+"Syntastic
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+
+"###########################
+" nerdtree-syntax-highlight
+"###########################
+" let g:WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1
+" let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
+" let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
+" let g:NERDTreeFileExtensionHighlightFullName = 1
+" let g:NERDTreeExactMatchHighlightFullName = 1
+" let g:NERDTreePatternMatchHighlightFullName = 1
+
+"####################
+"       CCLS
+"####################
 
