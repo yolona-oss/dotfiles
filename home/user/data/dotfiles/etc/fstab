@@ -1,0 +1,14 @@
+# /dev/nvme0n1p2 LABEL=archlinux
+UUID=bf5c57e9-678e-48fa-b8b8-ca6239952d91	/         	f2fs      	rw,noatime,discard,lazytime,background_gc=on,no_heap,inline_xattr,inline_data,inline_dentry,flush_merge,extent_cache,mode=adaptive,active_logs=6,alloc_mode=default,nocheckpoint_merge,fsync_mode=posix		0 1
+
+# /dev/nvme0n1p1
+UUID=7502-9B0A      	/boot     	vfat      	rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=ascii,shortname=mixed,utf8,errors=remount-ro	0 2
+
+# /dev/nvme0n1p3 LABEL=home
+UUID=ab0b2275-b723-4758-ab08-2ebedce0b1a4	/home     	f2fs      	rw,noatime,discard,lazytime,background_gc=on,no_heap,inline_xattr,inline_data,inline_dentry,flush_merge,extent_cache,mode=adaptive,active_logs=6,alloc_mode=default,nocheckpoint_merge,fsync_mode=posix		0 2
+
+# /dev/sda1
+UUID=db2369d5-ad00-49a9-9450-4b7c15bc295f	/home/data	ext4      	rw,noatime	0 2
+
+#/tmp
+tmpfs						/tmp		tmpfs		defaults,nosuid		0 0

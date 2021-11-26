@@ -1,0 +1,10 @@
+[Unit]
+Description=Removing trashed files
+Wants=trash-cleanup.timer
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/trash-empty
+
+[Install]
+WantedBy=multi-user.target 

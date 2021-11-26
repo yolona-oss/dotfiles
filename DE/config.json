@@ -1,0 +1,68 @@
+[
+    {
+        "name": "dusk",
+        "hash": "e627a1240ea8b7e34d922fdb97e73d10a4cdabfe",
+        "url": "https://github.com/bakkeby/dusk",
+        "dependences": [
+            "git",
+            "libx11",
+            "libxcb",
+            "libxinerama",
+            "libxft",
+            "imlib2",
+            "yajl"],
+        "files": [
+            "config.h"
+        ]
+    },
+
+    {
+        "name": "sxiv",
+        "hash": "d244d4f527893208fc2fa67ae51b32b1d2332659",
+        "url": "https://github.com/bakkeby/sxiv-flexipatch",
+        "dependences": ["cairo",
+            "inotify-tools",
+            "freetype2",
+            "librsvg",
+            "webp-pixbuf-loader",
+            "imlib2",
+            "desktop-file-utils",
+            "giflib",
+            "xdg-utils",
+            "hicolor-icon-theme",
+            "libexif",
+            "libxft"],
+        "files": [
+            "config.h",
+            "patches.h"
+        ]
+    },
+
+    {
+        "name": "st",
+        "hash": "de6163fafe22187ac6425ff9e513f720fca25223",
+        "url": "https://github.com/siduck/st",
+        "dependences": [
+            "libft",
+            "freetype2",
+            "fontconfig",
+            "harfbuzz",
+            "libx11"],
+        "files": [
+            "config.h",
+            "config.mk"
+        ]
+    },
+
+    {
+        "name": "slim_theme_dusk",
+        "hash": "",
+        "url": "",
+        "dependences": ["slim"],
+        "files": [
+            "background.png",
+            "panel.png",
+            "slim.theme"
+        ]
+    }
+]

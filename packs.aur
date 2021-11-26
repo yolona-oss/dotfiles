@@ -7,8 +7,8 @@ xbanish
 ananicy
 profile-sync-daemon
 
-ttf-font-awesome-pro
 ttf-monaco
+ttf-devicons
 
 plymouth
 passmenu2
@@ -16,4 +16,7 @@ networkmanager-dmenu-git
 bashmount
 
 dwm
-polybar
+
+logo-ls
+python2-img2text
+imgcat

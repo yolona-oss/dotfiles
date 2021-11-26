@@ -1,0 +1,71 @@
+_sync_dot()
+{
+	_dot_file_list()
+	{
+		file="${dotFilesTab:=$HOME/.config/incron/dotfiles}"
+		mask="IN_MODIFY"
+
+		while read line
+		do
+			COMPREPLY+=("$(awk -F "$mask" '{gsub(" ", "", $1); print $1}' <<< "$line")")
+		done <${file}
+	}
+
+	local cur prev words cword split
+	_init_completion -s || return
+
+	local commands=(add
+		sync
+		migrate
+		format
+		health
+		clean
+		help)
+
+	case $cword in
+		2)
+			case $prev in
+				add)
+					_filedir
+					return ;;
+				sync)
+					COMPREPLY=(all)
+					_dot_file_list
+					return ;;
+				migrate)
+					COMPREPLY=($(compgen -W "to from" "${COMP_WORDS[2]}"))
+					return ;;
+				format)
+					COMPREPLY=(columns)
+					return ;;
+				health)
+					COMPREPLY=($(compgen -W "existence clones" "${COMP_WORDS[2]}"))
+					return ;;
+				clean)
+					COMPREPLY=($(compgen -W "all unused saves" "${COMP_WORDS[2]}"))
+					return ;;
+				esac
+			;;
+		3)
+			case $prev in
+				from|to)
+					_filedir
+					return ;;
+				*)
+					_filedir
+					return ;;
+			esac
+			;;
+		1)
+			local command=($(compgen -W "$(echo ${commands[@]})" "${COMP_WORDS[1]}"))
+			COMPREPLY=("${command[@]}")
+
+			return ;;
+		*)
+			_filedir
+			return
+			;;
+		esac
+}
+
+complete -F _sync_dot sync_dot

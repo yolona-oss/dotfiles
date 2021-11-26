@@ -1,0 +1,19 @@
+# To specify a key, you can use 'xbindkeys --key' or
+# 'xbindkeys --multikey' and put one of the two lines in this file.
+#
+# The format of a command line is:
+#    "command to start"
+#       associated key
+#
+# A list of keys is in /usr/include/X11/keysym.h and in
+# /usr/include/X11/keysymdef.h
+# The XK_ is not needed.
+
+"xbindkeys_show" 
+  control+shift + q
+
+"xclip -o -selection primary"
+  contorl+shift + p
+
+"xclip -o -selection CLIPBOARD"
+  contorl+shift + v

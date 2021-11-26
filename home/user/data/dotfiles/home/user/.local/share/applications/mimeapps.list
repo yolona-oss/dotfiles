@@ -1,0 +1,29 @@
+[Default Applications]
+x-scheme-handler/magnet=transmission-cli.desktop
+x-scheme-handler/tg=telegramdesktop.desktop
+application/x-extension-eml=userapp-SeaMonkey-L87PZZ.desktop
+image/=sxiv.desktop
+x-scheme-handler/http=luakit.desktop
+x-scheme-handler/https=luakit.desktop
+text/html=luakit.desktop
+application/x-extension-htm=luakit.desktop
+application/x-extension-html=luakit.desktop
+application/x-extension-shtml=luakit.desktop
+application/pdf=org.pwmt.zathura.desktop
+video/=mpv.desktop
+video/webm=mpv.desktop
+image/gif=sxiv.desktop
+image/png=sxiv.desktop
+image/jpg=sxiv.desktop
+image/jpeg=sxiv.desktop
+image/bmp=sxiv.desktop
+application/directory=ranger.desktop
+application/inode=ranger.desktop
+inode/directory=ranger.desktop
+application/x-terminal-emulator=st.desktop
+text/=vim.desktop
+ranger/x-terminal-emulator=st.desktop
+
+[Added Associations]
+application/xhtml+xml=luakit.desktop;
+x-scheme-handler/ckan=ckan-handler.desktop
