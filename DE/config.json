@@ -1,7 +1,7 @@
 [
     {
         "name": "dusk",
-        "hash": "e627a1240ea8b7e34d922fdb97e73d10a4cdabfe",
+        "hash": "13f7a8d78a20f49ab444bace068a3e34199f5659",
         "url": "https://github.com/bakkeby/dusk",
         "dependences": [
             "git",

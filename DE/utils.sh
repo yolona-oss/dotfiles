@@ -9,12 +9,11 @@ die()
 {
 	if [[ -z $1 ]]
 	then
-		varn "Terminating"
+		varn_msg "Terminating"
 	else
-		varn "$@" "Terminating"
+		varn_msg "$@" "Terminating"
 	fi
 
-	cleanup
 	exit 1
 }
 

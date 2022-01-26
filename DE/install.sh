@@ -4,21 +4,22 @@
 #
 
 function check_deps() {
-    for dep in $@; do
-        msg=$(pacman -Q $dep 2>&1 1>/dev/null)
-        msg=${msg#*\'}
-        msg=${msg%\'*}
-        depserr+=($msg)
-        unset msg
-    done
+    if [[ -n $(which pacman 2>/dev/null) ]] ; then
+        depserr=()
+        for dep in $@; do
+            msg=$(pacman -Q $dep 2>&1 1>/dev/null)
+            msg=${msg#*\'}
+            msg=${msg%\'*}
+            depserr+=($msg)
+            unset msg
+        done
 
-    if [[ -n ${depserr[@]} ]]; then
-        # echo "No dependencies: ${depserr[@]}"
-        # exit 1
-        return "${depserr[@]}"
+        if [[ -n ${depserr[@]} ]]; then
+            printf "${depserr[*]}"
+        fi
     fi
 
-    return ""
+    printf ""
 }
 
 function build() {
@@ -36,7 +37,7 @@ function build() {
 
     case $1 in
         dusk)
-            err=$(check_deps ${DEPENDENCES["dusk"]})
+            err=$(check_deps "${DEPENDENCES["dusk"]}")
             if [[ -n "$err" ]]; then
                 die "Not statisfied dependences: $err"
             fi
@@ -57,7 +58,8 @@ function build() {
             git reset --hard ${HASH["dusk"]}
 
             info_msg "Copying files"
-            copy_files "${dusk_build_dir}" "dusk" "${dusk_files}"
+            copy_files "${dusk_build_dir}" "dusk" "${FILES["dusk"]}"
+            # copy_files "${dusk_build_dir}" "dusk" "${dusk_files}"
 
             info_msg "Installing dusk..."
             cd "${dusk_build_dir}"
@@ -85,7 +87,7 @@ function build() {
             git reset --hard ${HASH["sxiv"]}
 
             info_msg "Copying files"
-            copy_files "${sxiv_build_dir}" "sxiv" "${sxiv_files}"
+            copy_files "${sxiv_build_dir}" "sxiv" "${FILES["sxiv"]}"
 
             cd ${sxiv_build_dir}
             info_msg "Installing sxiv..."
@@ -114,7 +116,7 @@ function build() {
 
             cd "${st_build_dir}"
             info_msg "Copying files"
-            copy_files "${st_build_dir}" "st" "${st_files}"
+            copy_files "${st_build_dir}" "st" "${FILES["st"]}"
 
             info_msg "Installing st..."
             if [[ $UID == 0 ]]
@@ -188,11 +190,11 @@ do
 
     URL["${INSTALLERS[$i]}"]="$(jq -c ".[$i].url" < "$config" | sed 's/\"//g')"
     HASH["${INSTALLERS[$i]}"]="$(jq -c ".[$i].hash" < "$config" | sed 's/\"//g')"
-    DEPENDENCES["${INSTALLERS[$i]}"]="$(jq -c ".[$i].dependences" < "$config" | sed 's/\]/\)/g' | sed 's/\[/\(/g' | sed 's/\"//g' | sed 's/,/ /g')"
-    FILES["${INSTALLERS[$i]}"]="$(jq -c ".[$i].files" < "$config" | sed 's/\]/\)/g' | sed 's/\[/\(/g' | sed 's/\"//g' | sed 's/,/ /g')"
+    DEPENDENCES["${INSTALLERS[$i]}"]="$(jq -c ".[$i].dependences" < "$config" | sed 's/[][]//g' | sed 's/\"//g' | sed 's/,/ /g')"
+    FILES["${INSTALLERS[$i]}"]="$(jq -c ".[$i].files" < "$config" | sed 's/[][]//g' | sed 's/\"//g' | sed 's/,/ /g')"
 
-    eval ${INSTALLERS[$i]}_deps=${DEPENDENCES["${INSTALLERS[$i]}"]}
-    eval ${INSTALLERS[$i]}_files=${FILES["${INSTALLERS[$i]}"]}
+    # eval ${INSTALLERS[$i]}_deps=${DEPENDENCES["${INSTALLERS[$i]}"]}
+    # eval ${INSTALLERS[$i]}_files=${FILES["${INSTALLERS[$i]}"]}
 done
 
 success_msg "Config reading completed"
@@ -205,6 +207,8 @@ do
         break
     fi
 done
+
+echo ${DEPENDENCES[dusk]}
 
 if [[ $go ]]
 then
