@@ -54,7 +54,6 @@
 /home/xewii/.bash/bash-wakatime/bash-wakatime.sh              IN_MODIFY sync_dot sync $@
 /home/xewii/.bash/colorscheme.sh                              IN_MODIFY sync_dot sync $@
 /home/xewii/.bash_completion                                  IN_MODIFY sync_dot sync $@
-/home/xewii/.bash_history                                     IN_MODIFY sync_dot sync $@
 /home/xewii/.bash/img.sh                                      IN_MODIFY sync_dot sync $@
 /home/xewii/.bash_logout                                      IN_MODIFY sync_dot sync $@
 /home/xewii/.bash/misc.sh                                     IN_MODIFY sync_dot sync $@
