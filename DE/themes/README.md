@@ -1,1 +1,0 @@
-# themes for dwm & st
