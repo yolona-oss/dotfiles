@@ -88,6 +88,9 @@ while read file; do
 	"C-c") #copy path of current displayed file to clipboard
 		echo -n "${file}" | xclip -selection clipboard
 		;;
+	"C-C") #copy image to clipboard
+		xclip -selection clipboard -t image/png -i "${file}"
+		;;
 	"C-d") #move current image to trash and push it's name to stack
 		# mv "${file}" "${trash_dir}/$(basename "$file")" # without trash-cli
 		trash-put "${file}"

@@ -33,6 +33,8 @@ alias xprop-ict="xprop | awk '/^WM_CLASS/{sub(/.* =/, \"instance:\"); sub(/,/, \
 
 # Calculator
 alias bc='bc -ql'
+
+# Calendar
 alias cal='cal -m'
 
 # Logging
@@ -45,9 +47,9 @@ alias localip=$(ip addr | grep -w inet | gawk '{if (NR==2) {$0=$2; gsub(/\//," "
 # alias netcat-reciver='netcat -l -p 7000 | pv | tar x'
 
 # System cond
-alias reboot="sudo systemctl reboot"
-alias poweroff="sudo systemctl poweroff"
-alias halt="sudo systemctl halt"
+# alias reboot="sudo systemctl reboot"
+# alias poweroff="sudo systemctl poweroff"
+# alias halt="sudo systemctl halt"
 
 # Image viewing 
 # sxiv

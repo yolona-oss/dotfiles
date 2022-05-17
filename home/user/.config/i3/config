@@ -1,0 +1,256 @@
+# i3 config file (v4)
+# v4.16
+#
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+# 04 nov 2018 - Electro7
+
+#..........
+# Init run
+#..........
+
+set $ws1 1
+set $ws2 2
+set $ws3 3
+set $ws4 4
+set $ws5 5
+set $ws6 6
+set $ws7 7
+set $ws8 8
+set $ws9 9
+
+# My bar -> Polybar
+exec_always --no-startup-id ~/.config/polybar/launch.sh
+
+exec --no-startup-id picom --config $HOME/.config/picom.conf
+exec --no-startup-id sh ~/.fehbg
+exec --no-startup-id dunst
+exec --no-startup-id xdg-user-dirs-update
+exec --no-startup-id xbanish
+exec --no-startup-id autocutsel -selection PRIMARY
+exec --no-startup-id firefox
+exec --no-startup-id steam
+exec --no-startup-id telegram-desktop
+exec --no-startup-id discord
+exec --no-startup-id st -c IDE -e vim
+exec --no-startup-id kitty --class FileManager --name scratchpad --execute ranger
+exec --no-startup-id st -n scratchpad -c Terminal
+exec --no-startup-id st -n scratchpad -c MPDClient -e vimpc
+
+#.......
+# Font
+#.......
+
+#set $ft xft:Inconsolata Nerd Font Mono:size=10
+#set $ft -xos4-terminesspowerline-medium-r-normal--12-120-72-72-c-60-iso10646-1
+set $ft pango: Inconsolata Nerd Font 10
+#set $ft terminus12
+font $ft
+
+#..........
+# Look
+#..........
+
+new_window pixel 2
+new_float pixel 2
+floating_minimum_size 400x300
+floating_maximum_size -1x-1
+focus_follows_mouse no
+
+# Hybrid colors
+set $back               #1d1F21
+set $black              #282A2E
+set $grey               #373B41
+set $lightgrey          #707880
+set $white              #C5C8C6
+set $yellow             #F0C674
+set $red                #CC6666
+set $darkred            #A54242
+set $green              #B5BD56
+
+# Reading colors from resources
+# set_from_resource $back         i3wm.background #1D1F21
+# set_from_resource $black        i3wm.color0     #282A2E
+# set_from_resource $grey         i3wm.color8     #373B41
+# set_from_resource $lightgrey    i3wm.color7     #707880
+# set_from_resource $white        i3wm.color15    #C5C8C6
+# set_from_resource $yellow       i3wm.color11    #F0C674
+# set_from_resource $red          i3wm.color9     #CC6666
+# set_from_resource $darkred      i3wm.color1     #A54242
+# set_from_resource $green        i3wm.color10    #B5BD56
+
+#class                  border      backgr.     text        split
+client.focused          $green     $green       $black      $red
+client.focused_inactive $grey       $grey       $lightgrey  $grey
+client.unfocused        $grey       $grey       $lightgrey  $grey
+client.urgent           $red        $red        $black      $red
+client.background       $back
+
+#..........
+# Gaps
+#..........
+
+for_window [class=".*"] border pixel 1
+#gaps inner 6 smart_gaps on smart_borders on
+
+#..........
+# Apps
+#..........
+
+# Principal mod key (Super = Win key)
+# mod1 = Alt (xmodmap to show)
+# mod4 = Winkey (xmodmap to show)
+set $mod Mod4
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Move all apps with name "scratchpad" to scratchpad
+for_window [instance="scratchpad"] move window to scratchpad, scratchpad show
+
+# Terminal (mod+Enter)
+bindsym $mod+Return exec st
+bindsym $mod+Shift+a exec mpcyt_from_clip
+bindsym $mod+p exec bash -i -c "rofi -no-config -no-lazy-grab -show drun -modi run -theme ~/.config/polybar/scripts/rofi/launcher.rasi"
+# start rofi window list (mod+w)
+bindsym $mod+w exec rofi -no-config -no-lazy-grab -show window -theme ~/.config/polybar/scripts/rofi/launcher.rasi
+
+# Laptop keys
+bindsym XF86AudioRaiseVolume exec "amixer sset Master 5%+"
+bindsym XF86AudioLowerVolume exec "amixer sset Master 5%-"
+bindsym XF86AudioMute exec "amixer -q sset Master toggle"
+#bindsym XF86AudioMic exec "amixer -q sset Mic toggle"
+bindsym XF86MonBrightnessDown exec "xbacklight -dec 5"
+bindsym XF86MonBrightnessUp exec "xbacklight -inc 5"
+#bindsym XF86AudioPlay exec ncmpcpp toggle
+#bindsym XF86AudioStop exec ncmpcpp stop
+#bindsym XF86AudioPrev exec ncmpcpp prev
+#bindsym XF86AudioNext exec ncmpcpp next
+bindsym --release Print exec --no-startup-id screenshot
+bindsym --release Shift+Print exec --no-startup-id screenshot
+
+#assign application to workspace
+assign [class="(?i)Firefox"]         $ws4
+assign [class="(?i)Steam"]           $ws5
+assign [class="(?i)steam_app_"]      $ws5
+assign [class="(?i)TelegramDesktop"] $ws8
+assign [class="(?i)discord"]         $ws8
+assign [class="(?i)Zathura"]         $ws6
+assign [class="(?i)Lutris"]          $ws5
+
+# Layout
+for_window [class="(?i)feh"]    floating enable
+for_window [class="(?i)Steam"]  floating disable
+for_window [class="(?i)Lutris"] floating disable
+for_window [class="(?i)mpv"]    floating enable
+for_window [class="(?i)sxiv"]   floating enable
+for_window [class="(?i)vlc"]    floating enable
+for_window [workspace=$ws5]     floating enable
+
+#...........
+# Keybinds i3
+#...........
+
+# kill focused window (mod+q)
+bindsym $mod+q kill
+
+# Cursor key for focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Shitf+cursor for move windows
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation (mod+h)
+bindsym $mod+h split h
+
+# split in vertical orientation (mod+v)
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container (mod+f)
+bindsym $mod+f fullscreen
+
+# change container layout (stacked (mod+s), tabbed (mod+t), default(mod+alt+e))
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+$Mod1+e layout default
+#bindsym $mod+space layout toggle split
+
+# toggle tiling / floating (mod+shitf+space)
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+Mod1+space floating toggle
+
+# change focus between tiling / floating windows (mod+space)
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container (mod+a)
+bindsym $mod+a focus parent
+
+# focus the child container (mod+z)
+bindsym $mod+z focus child
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+
+# reload the configuration file (mod+shitf+c)
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3) (mod+alt+shitf+r)
+bindsym $mod+$Mod1+Shift+r restart
+
+bindsym $mod+Shift+grave move scratchpad
+bindsym $mod+grave scratchpad show
+
+bindsym $mod+e [class="^Terminal$"] scratchpad show
+bindsym $mod+Shift+e exec st -n scratchpad -c Terminal
+bindsym $mod+r [class="^FileManager$"] scratchpad show
+bindsym $mod+Shift+r exec kitty --class FileManager --name scratchpad --execute ranger
+bindsym $mod+m [class="^MPDClient$"] scratchpad show
+bindsym $mod+Shift+m exec st -n scratchpad -c MPDClient -e vimpc
+
+# resize window (you can also use the mouse for that) (mod+r)
+mode "resize" {
+  # These bindings trigger as soon as you enter the resize mode
+
+  # Pressing left will shrink the window’s width.
+  # Pressing right will grow the window’s width.
+  # Pressing up will shrink the window’s height.
+  # Pressing down will grow the window’s height.
+  bindsym a resize shrink width 10 px or 10 ppt
+  bindsym s resize grow height 10 px or 10 ppt
+  bindsym w resize shrink height 10 px or 10 ppt
+  bindsym d resize grow width 10 px or 10 ppt
+
+  # same bindings, but for the arrow keys
+  bindsym Left resize shrink width 1 px or 1 ppt
+  bindsym Down resize grow height 1 px or 1 ppt
+  bindsym Up resize shrink height 1 px or 1 ppt
+  bindsym Right resize grow width 1 px or 1 ppt
+
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+# bindsym $mod+r mode "resize"

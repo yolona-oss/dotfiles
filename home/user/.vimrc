@@ -2,7 +2,7 @@ set nocompatible
 " filetype off
 
 "###################"
-"	PLUGGIN SETUP   "
+"   PLUGGIN SETUP   "
 "###################"
 let g:plug_threads = 6
 let g:plug_retries = 3
@@ -11,52 +11,59 @@ filetype plugin on
 filetype plugin indent on
 
 call plug#begin('~/.vim/plugged')
-	Plug 'wakatime/vim-wakatime'		"wakatime.com
-	Plug 'vim-scripts/vim-auto-save'	"files autosave
-	Plug 'SirVer/ultisnips'				"snippets
-    Plug 'https://github.com/honza/vim-snippets' "snippents files
-	Plug 'https://github.com/pangloss/vim-javascript.git' "javascript extension
-	Plug 'vim-airline/vim-airline'		"status line
-	Plug 'vim-airline/vim-airline-themes' "themes
-	Plug 'vim-scripts/AfterColors.vim'    "themes
-	Plug 'rafi/awesome-vim-colorschemes'  "themes
-	Plug 'sonph/onehalf', { 'rtp': 'vim' } "theme
-    Plug 'https://github.com/sjl/badwolf' "theme
-    Plug 'https://github.com/joshdick/onedark.vim' "theme
-	Plug 'https://github.com/plasticboy/vim-markdown' "markdown format support
-	Plug 'ryanoasis/vim-devicons'		"icons support
-	Plug 'powerline/fonts'				"powerline fonts
-	Plug 'https://github.com/Yggdroot/indentLine'
-	Plug 'ycm-core/YouCompleteMe' 		"code completer
-	Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
-	Plug 'tpope/vim-commentary'			"commentary shortcuts
-	Plug 'm-pilia/vim-pkgbuild'			"archlinux AUR PKGBUILD files support
-	Plug 'https://github.com/tpope/vim-surround'	"html-like tags handle utils
-	Plug 'https://github.com/octol/vim-cpp-enhanced-highlight' "cpp syntax hilightinght
-	Plug 'ctrlpvim/ctrlp.vim'			"file finder
-	Plug 'preservim/nerdtree'			"dir tree dock
+    Plug 'https://github.com/xolox/vim-misc'                   " auto load
+    Plug 'https://github.com/xolox/vim-session'                " session manager
+    Plug 'wakatime/vim-wakatime'                               " wakatime.com
+    " Plug 'vim-scripts/vim-auto-save'                           " files autosave
+    Plug 'SirVer/ultisnips'                                    " snippets
+    Plug 'https://github.com/honza/vim-snippets'               " snippents files
+    Plug 'https://github.com/pangloss/vim-javascript.git'      " javascript extension
+    Plug 'leafgarland/typescript-vim'
+    Plug 'maxmellon/vim-jsx-pretty'
+    Plug 'jparise/vim-graphql'
+    Plug 'vim-airline/vim-airline'                             " status line
+    Plug 'vim-airline/vim-airline-themes'                      " themes
+    Plug 'vim-scripts/AfterColors.vim'                         " themes
+    Plug 'rafi/awesome-vim-colorschemes'                       " themes
+    Plug 'sonph/onehalf', { 'rtp': 'vim' }                     " theme
+    Plug 'https://github.com/sjl/badwolf'                      " theme
+    Plug 'https://github.com/joshdick/onedark.vim'             " theme
+    " Plug 'https://github.com/plasticboy/vim-markdown'          " markdown format support
+    Plug 'ryanoasis/vim-devicons'                              " icons support
+    " Plug 'powerline/fonts'                                     " powerline fonts
+    Plug 'https://github.com/Yggdroot/indentLine'
+    Plug 'ycm-core/YouCompleteMe'                              " code completer
+    Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+    Plug 'tpope/vim-commentary'                                " commentary shortcuts
+    " Plug 'm-pilia/vim-pkgbuild'                                " archlinux AUR PKGBUILD files support
+    Plug 'https://github.com/tpope/vim-surround'               " html-like tags handle utils
+    Plug 'https://github.com/octol/vim-cpp-enhanced-highlight' " cpp syntax hilightinght
+    Plug 'ctrlpvim/ctrlp.vim'                                  " file finder
+    Plug 'preservim/nerdtree'                                  " dir tree dock
     " Plug 'https://github.com/vim-scripts/taglist.vim'
     Plug 'https://github.com/preservim/tagbar'
-	Plug 'vim-scripts/bufkill.vim'		"exit buffers without exiting vim
-	Plug 'jreybert/vimagit'				"git support
-	Plug 'https://github.com/ap/vim-css-color' "HEX-colors hilighting
-    Plug 'https://github.com/matze/vim-move' "code moving
-    Plug 'https://github.com/sjl/gundo.vim' "undo tree
-    Plug 'https://github.com/sheerun/vim-polyglot' " colors
-    Plug 'https://github.com/junegunn/vim-easy-align' " fast text aligning
+    Plug 'vim-scripts/bufkill.vim'                             " exit buffers without exiting vim
+    Plug 'jreybert/vimagit'                                    " git support
+    Plug 'https://github.com/ap/vim-css-color'                 " HEX-colors hilighting
+    Plug 'https://github.com/matze/vim-move'                   " code moving
+    " Plug 'https://github.com/sjl/gundo.vim'                    " undo tree
+    " Plug 'https://github.com/sheerun/vim-polyglot'             " colors
+    Plug 'https://github.com/junegunn/vim-easy-align'          " fast text aligning
     Plug 'https://github.com/ervandew/supertab'
-    Plug 'https://github.com/jiangmiao/auto-pairs' " completing pairs
-    Plug 'https://github.com/rhysd/vim-clang-format' " auto formating
-    Plug 'honza/vim-snippets' " set of snippets
-    Plug 'https://github.com/ryanoasis/nerd-fonts'
-	" Plug 'https://github.com/junegunn/vim-easy-align'
-	" Plug 'https://github.com/scrooloose/syntastic'
-	" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-	" Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+    Plug 'https://github.com/jiangmiao/auto-pairs'             " completing pairs
+    Plug 'https://github.com/rhysd/vim-clang-format'           " auto formating
+    Plug 'honza/vim-snippets'                                  " set of snippets
+    " Plug 'https://github.com/ryanoasis/nerd-fonts'
+    Plug 'https://github.com/godlygeek/tabular'                " tab extender
+    Plug 'https://github.com/junegunn/vim-easy-align'
+    Plug 'https://github.com/fadein/vim-FIGlet'  " figlet
+    Plug 'https://github.com/scrooloose/syntastic'
+    " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    " Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 call plug#end()
 
 "##########################
-"	     GENERAL
+"        GENERAL
 "##########################
 set number
 set relativenumber
@@ -64,9 +71,9 @@ set cursorline
 syntax on
 set encoding=UTF-8
 set fileencoding=UTF-8
-set guifont=Anonymous\ Pro\ Nerd\ Font\ Complete\ Mono\ 12
-set exrc	"use local ./vimrc for each dir	
-set secure	"disallow to run autocmd in local ./vimrc
+" set guifont=Anonymous\ Pro\ Nerd\ Font\ Complete\ Mono\ 12
+set exrc    "use local ./vimrc for each dir
+set secure  "disallow to run autocmd in local ./vimrc
 set smartcase "smart search
 set hlsearch
 set ignorecase
@@ -78,8 +85,8 @@ set tabstop=4
 set shiftwidth=4
 set smarttab
 set expandtab
-set smartindent
-set updatetime=5000
+" set smartindent
+" set updatetime=5000
 set t_Co=256
 set autoread
 set noequalalways
@@ -88,14 +95,16 @@ set winheight=25
 
 set noswapfile
 set nobackup
-set undodir=~/.vim/undodir
-set undofile
+set undodir=~/data/.vim/undodir
+set backupdir=~/data/.vimtmp//,.
+" set undofile
 
 autocmd filetype c,cpp set cin
+autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
 
 augroup project
     autocmd!
-    autocmd BufRead,BufNewFile *.h,*.c set filetype=c
+    autocmd BufRead,BufNewFile *.hpp,*.cpp set filetype=cpp
 augroup END
 
 "######################
@@ -161,7 +170,8 @@ let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_keep_logfiles = 0
 " let g:ycm_log_level = 'debug'
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-" let g:ycm_show_diagnostics_ui = 0
+let g:ycm_show_diagnostics_ui = 1
+let g:ycm_error_symbol = '\\'
 
 "######################
 "      NERDTree
@@ -172,8 +182,8 @@ autocmd StdinReadPre * let s:std_in=1
 " Show NERDTree window if vim opened without arguments
 
 if argc() == 0
-	autocmd VimEnter * NERDTree projects " Startup default directory
-	autocmd VimEnter * if argc() == 0 && !exists("s:std_in") && v:this_session == "" | NERDTree | endif " Autostart when use stored session
+    autocmd VimEnter * NERDTree projects " Startup default directory
+    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") && v:this_session == "" | NERDTree | endif " Autostart when use stored session
 endif
 
 " Closing NERDTree
@@ -189,13 +199,13 @@ let NERDTreeMinimalUI=1
 " let g:NERDTreeFileExtensionHighlightFullName = 1
 " let g:NERDTreeExactMatchHighlightFullName = 1
 " let g:NERDTreePatternMatchHighlightFullName = 1
-" let g:NERDTreeHighlightFolders = 1		" enables folder icon highlighting using exact match
-" let g:NERDTreeHighlightFoldersFullName = 1	" highlights the folder name
+" let g:NERDTreeHighlightFolders = 1        " enables folder icon highlighting using exact match
+" let g:NERDTreeHighlightFoldersFullName = 1    " highlights the folder name
 
 " NERDTress File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-	exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
-	exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+    exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+    exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
 endfunction
 
 " Dir arrows
@@ -238,10 +248,10 @@ let g:ctrlp_user_command = 'find %s -type f'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
  
 let g:ctrlp_custom_ignore = {
-	\ 'dir':  '\v[\/](node_modules|target|dist)|(\.(git|hg|svn))$',
-	\ 'file': '\v\.(exe|so|dll|DS_Store)$',
-	\ 'link': 'some_bad_symbolic_links',
-	\ }
+    \ 'dir':  '\v[\/](node_modules|target|dist)|(\.(git|hg|svn))$',
+    \ 'file': '\v\.(exe|so|dll|DS_Store)$',
+    \ 'link': 'some_bad_symbolic_links',
+    \ }
 
 "########################
 "      AfterColor
@@ -250,7 +260,7 @@ let g:ctrlp_custom_ignore = {
 " if argc() == 0
 colorscheme badwolf
 " else
-" 		colorscheme happy_hacking
+"       colorscheme happy_hacking
 " endif
 
 "##########################
@@ -268,12 +278,12 @@ let g:airline_enable_bufferline=1
 let g:airline_powerline_fonts = 1
 
 if !exists('g:airline_symbols')
-	let g:airline_symbols = {}
+    let g:airline_symbols = {}
 endif
 
-let g:airline_fugitive_prefix	= '⎇ '
-let g:airline_paste_symbol		= 'ρ'
-let g:airline_branch_prefix		= '⎇ '
+let g:airline_fugitive_prefix   = '⎇ '
+let g:airline_paste_symbol      = 'ρ'
+let g:airline_branch_prefix     = '⎇ '
 
 " " unicode symbols
 " let g:airline_left_sep = '»'
@@ -313,9 +323,9 @@ let g:airline_symbols.whitespace = 'Ξ'
 
 let g:airline_stl_path_style = 'short'
 
-let w:airline_disable_statusline	= 0
-let w:airline_skip_empty_sections	= 0
-let g:airline_statusline_ontop		= 0
+let w:airline_disable_statusline    = 0
+let w:airline_skip_empty_sections   = 0
+let g:airline_statusline_ontop      = 0
 
 let g:airline_detect_spell=1
 
@@ -346,7 +356,7 @@ let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 "##########
-"	CPP
+"   CPP
 "##########
 " let g:cpp_class_scope_highlight = 1
 " let g:cpp_member_variable_highlight = 1
@@ -390,8 +400,8 @@ let g:cpp_function_highlight = 1
 "####################
 
 " augroup javascript_folding
-" 	au!
-" 	au FileType javascript setlocal foldmethod=syntax
+"   au!
+"   au FileType javascript setlocal foldmethod=syntax
 " augroup END
 
 map <leader>l :exec &conceallevel ? "set conceallevel=0" : "set conceallevel=1"<CR>
@@ -451,3 +461,17 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+""""""""""""
+"  figlet  "
+""""""""""""
+let g:figletFontDir = '/usr/share/figlet'
+
+"""""""""""""""""
+"  vim-session  "
+"""""""""""""""""
+set sessionoptions-=help
+let g:session_directory = '~/data/.vim/sessions'
+let g:session_default_name = 'main'
+" let g:session_autosave = 'yes'
+let g:session_autosave_periodic = 5

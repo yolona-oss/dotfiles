@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=LeftWM via systemd
+Comment=A window manager for the adventurer
+Exec=leftwm-service
+TryExec=leftwm-service
+Type=Application
+X-LightDM-DesktopName=LeftWM
+DesktopNames=LeftWM
+Keywords=tiling;wm;windowmanager;window;manager;

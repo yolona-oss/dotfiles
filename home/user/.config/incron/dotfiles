@@ -130,3 +130,6 @@
 /home/xewii/.Xresources                                       IN_MODIFY sync_dot sync $@
 /home/xewii/.xscreensaver                                     IN_MODIFY sync_dot sync $@
 /usr/local/bin/status_updater.sh                              IN_MODIFY sync_dot sync $@
+/usr/share/xsessions/leftwm.desktop IN_MODIFY sync_dot sync $@
+/usr/local/bin/leftwm-service IN_MODIFY sync_dot sync $@
+/home/xewii/.config/i3/config IN_MODIFY sync_dot sync $@

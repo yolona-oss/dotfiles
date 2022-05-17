@@ -17,7 +17,7 @@ source "$HOME"/.config/environment
 if [[ -d "$HOME"/.bash ]]
 then
 	# Waka
-	source "$HOME"/.bash/bash-wakatime/bash-wakatime.sh
+	# source "$HOME"/.bash/bash-wakatime/bash-wakatime.sh
 
 	for scrpt in "$HOME"/.bash/*.sh
 	do
@@ -34,21 +34,26 @@ export LESS='-R'
 export LESSOPEN='|~/.lessfilter %s'
 
 # History saving parameters
-HISTCONTROL=ignoreboth
+HISTCONTROL=ignoreboth		# ignore same entries
 export HISTIGNORE="&:ls:[bf]g:exit"
 HISTSIZE=10000
 
 # Installing BASH options
-#shopt -s autocd
-shopt -s checkwinsize
-shopt -s histappend
-shopt -s extglob
-shopt -s dotglob
-#shopt -s nullglob
-shopt -s cdspell
-shopt -s no_empty_cmd_completion
+shopt -s extglob		# extra globing
+shopt -s globstar		# "*" globing
+shopt -s autocd			# change dirs without cd
+shopt -s direxpand		# expanding var values in path
+shopt -s histverify		# showing last command before execute it
+shopt -s checkwinsize	# check terminal size on each command exec
+shopt -s histappend		# history appending, not overwriting
+shopt -s dotglob		# globing dot files
+shopt -s expand_aliases
+#shopt -s nullglob		#
+shopt -s cdspell		# auto fix incorect dir names
+shopt -s no_empty_cmd_completion #
+shopt -s checkjobs		# dont exit if other proceses executing
 bind "set bell-style none"
-export IGNOREEOF="2"
+export IGNOREEOF="2"	#
 
 # Merging bash-complition scripts
 if ! shopt -oq posix; then
@@ -62,14 +67,17 @@ if ! shopt -oq posix; then
 fi
 
 # Setting command prompt
-if [[ $TERM == dumb ]]
-then
+if [[ $TERM == dumb ]]; then
     echo
     # dummy
-elif [[ $TERM == linux ]]
-then
+elif [[ $TERM == linux ]]; then
     echo
     # TODO
 elif [[ ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
     set_prompt
 fi
+
+
+# BEGIN_KITTY_SHELL_INTEGRATION
+# if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
+# END_KITTY_SHELL_INTEGRATION

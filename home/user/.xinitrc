@@ -4,6 +4,8 @@ xresources=$HOME/.Xresources
 
 xrdb -load $xresources
 
-# exec dwm
-# dbus-launch --exit-with-session dusk
-dbus-launch dusk
+unset xdefaults
+unset xresources
+
+#exec dbus-launch --exit-with-session i3 --force-xinerama
+exec dbus-launch --exit-with-session dusk

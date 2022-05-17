@@ -15,6 +15,10 @@ function ruen() {
     trans -e google -from ru -to en "$*"
 }
 
+function lines_of_files_in_file() {
+    cat "${1}" | cut --delimiter=" " --fields=1 | paste -sd+ | bc
+}
+
 compress()
 {
 	return
