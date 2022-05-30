@@ -33,6 +33,7 @@ call plug#begin('~/.vim/plugged')
     " Plug 'powerline/fonts'                                     " powerline fonts
     Plug 'https://github.com/Yggdroot/indentLine'
     Plug 'ycm-core/YouCompleteMe'                              " code completer
+    Plug 'https://github.com/fatih/vim-go'
     Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
     Plug 'tpope/vim-commentary'                                " commentary shortcuts
     " Plug 'm-pilia/vim-pkgbuild'                                " archlinux AUR PKGBUILD files support
