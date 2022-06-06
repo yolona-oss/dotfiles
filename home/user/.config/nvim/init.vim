@@ -11,6 +11,8 @@ filetype plugin on
 filetype plugin indent on
 
 call plug#begin('~/.vim/plugged')
+    Plug "https://github.com/windwp/nvim"
+    Plug 'liuchengxu/vim-clap' " preview
     Plug 'mhinz/vim-startify'
     Plug 'https://github.com/xolox/vim-misc'                   " auto load
     Plug 'https://github.com/xolox/vim-session'                " session manager
@@ -371,32 +373,6 @@ let g:cpp_member_highlight = 1
 let g:cpp_attributes_highlight = 1
 let g:cpp_function_highlight = 1
 
-"#########
-"Syntastic
-"#########
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-
-"###########################
-" nerdtree-syntax-highlight
-"###########################
-" let g:WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1
-" let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
-" let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
-" let g:NERDTreeFileExtensionHighlightFullName = 1
-" let g:NERDTreeExactMatchHighlightFullName = 1
-" let g:NERDTreePatternMatchHighlightFullName = 1
-
-"####################
-"       CCLS
-"####################
-
 "####################
 "   vim-javascript
 "####################
@@ -510,3 +486,9 @@ let g:startify_lists = [
 let g:startify_session_before_save = [
             \ "ContextDisable"
             \ ]
+
+""""""""""""""
+"  windline  "
+""""""""""""""
+
+" require('wlsample.bubble')

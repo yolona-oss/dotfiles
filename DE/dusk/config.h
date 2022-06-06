@@ -252,7 +252,7 @@ static const Rule clientrules[] = {
 	{ .class = "TelegramDesktop", .workspace = "8", .flags = AttachMaster },
 	{ .class = "IDE", .workspace = "1", .flags = Terminal },
 	{ .class = "Gimp", .workspace = "9", .flags = Floating|SwitchWorkspace },
-	{ .class = "firefox", .workspace = "7", .flags = AttachMaster|SwitchWorkspace },
+	{ .class = "firefox", .workspace = "7", .flags = AttachMaster },
 	{ .class = "Luakit", .workspace = "4", .flags = Centered },
 	{ .class = "qutebrowser", .workspace = "4", .flags = AlwaysOnTop|Centered },
 	{ .class = "Steam", .workspace = "5", .flags = Floating|Centered },
