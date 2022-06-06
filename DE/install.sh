@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# script for installing some non-packaged programs
+# script for installing some non-packaged custom desktop enviroment programs
 #
 
 function check_deps() {
@@ -29,7 +29,7 @@ function build() {
         to="$1"
         dir="$2"
         shift 2
-        for file in "${@}"
+        for file in ${@}
         do
             cp "$start_dir/$dir/$file" "$to/"
         done

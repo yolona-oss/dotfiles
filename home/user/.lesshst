@@ -1,13 +1,5 @@
 .less-history-file:
 .search
-"er
-"error
-"config
-"-d
-"asdf
-"user
-"-s
-"row
 "line
 "delay
 "general
@@ -100,3 +92,12 @@
 "foc
 "-u
 "-f
+"geom
+"geo
+"-d
+"\-d
+"-d
+.search
+"dir
+"fold
+"dir

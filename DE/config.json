@@ -1,7 +1,7 @@
 [
     {
         "name": "dusk",
-        "hash": "13f7a8d78a20f49ab444bace068a3e34199f5659",
+        "hash": "5aa0df6412e12e2bc4e6cee7f1f1d5d1f5a11482",
         "url": "https://github.com/bakkeby/dusk",
         "dependences": [
             "git",
@@ -40,8 +40,8 @@
 
     {
         "name": "st",
-        "hash": "de6163fafe22187ac6425ff9e513f720fca25223",
-        "url": "https://github.com/siduck/st",
+        "hash": "6a7484d8ed3c62b01ec2c0c5bf673b1c103a048f",
+        "url": "https://github.com/siisgoo/st",
         "dependences": [
             "libft",
             "freetype2",

@@ -11,3 +11,5 @@
 	credentialStore = plaintext
 [credential "https://dev.azure.com"]
 	useHttpPath = true
+[safe]
+	directory = /opt/brew

@@ -1,4 +1,5 @@
 inxi
+bash-it
 
 vim-plug
 
@@ -14,8 +15,6 @@ plymouth
 passmenu2
 networkmanager-dmenu-git
 bashmount
-
-dwm
 
 logo-ls
 python2-img2text
