@@ -94,8 +94,8 @@ static uint64_t functionality = 0
 //	|GreedyMonitor // disables swap of workspaces between monitors
 	|SmartLayoutConvertion // automatically adjust layout based on monitor orientation when moving a workspace from one monitor to another
 	|AutoHideScratchpads // automatically hide open scratchpads when moving to another workspace
-//	|RioDrawIncludeBorders // indicates whether the area drawn using slop includes the window borders
-//	|RioDrawSpawnAsync // spawn the application alongside rather than after drawing area using slop
+	|RioDrawIncludeBorders // indicates whether the area drawn using slop includes the window borders
+	|RioDrawSpawnAsync // spawn the application alongside rather than after drawing area using slop
 //	|RestrictFocusstackToMonitor // restrict focusstack to only operate within the monitor, otherwise focus can drift between monitors
 	|WinTitleIcons // adds application icons to window titles in the bar
 //	|WorkspaceLabels // adds the class of the master client next to the workspace icon
@@ -202,7 +202,7 @@ static const char *const autostart[] = {
 	"slstatus",         NULL,         //status bar updater
 	"sh",               "-c",         "/home/xewii/.fehbg",             NULL, //wallpaper
 	"st",               "-c",         "IDE",                            "-e", "nvim", NULL, //IDE
-    "qutebrowser",      NULL,
+        "qutebrowser",      NULL,
 	"dunst",            NULL,         //notification daemon
 	"notmon",           NULL,         //sys monitor
 	"xbanish",          NULL,         //mouse hidder

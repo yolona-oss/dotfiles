@@ -1,107 +1,77 @@
-#!/bin/sh
-#
-# $Header: /etc/acpi/default.sh                          Exp $
-# $Author: (c) 2012-2014 -tclover <tokiclover@dotfiles.> Exp $
-# $License: MIT (or 2-clause/new/simplified BSD)         Exp $
-# $Version: 2014/12/24 21:09:26                          Exp $
-#
- 
-log() { logger -p daemon "ACPI: $*"; }
-uhd() { log "event unhandled: $*"; }
- 
-set $*
-group=${1%/*}
-action=${1#*/}
-device=$2
-id=$3
-value=$4
- 
-[ -d /dev/snd ] && alsa=true || alsa=false
-[ -d /dev/oss ] && oss=true || oss=false
-amixer="amixer -q set Master"
-ossmix="ossmix -- vmix0-outvol"
- 
-case $group in
+#!/bin/bash
+# Default acpi script that takes an entry for all actions
+
+case "$1" in
+    button/power)
+        case "$2" in
+            PBTN|PWRF)
+                logger 'PowerButton pressed'
+                ;;
+            *)
+                logger "ACPI action undefined: $2"
+                ;;
+        esac
+        ;;
+    button/sleep)
+        case "$2" in
+            SLPB|SBTN)
+                logger 'SleepButton pressed'
+                ;;
+            *)
+                logger "ACPI action undefined: $2"
+                ;;
+        esac
+        ;;
     ac_adapter)
-        case "$device" in
-            AC*|ACAD|ADP0)
-				backlight_name="intel_backlight"
-				max_bri=$(</sys/class/backlight/${backlight_name}/max_brightness)
-                case "$value" in
+        case "$2" in
+            AC|ACAD|ADP0)
+                case "$4" in
                     00000000)
-						log "switching to power.bat power profile"
-						bri=$(( max_bri * 4 / 5 ))
-						echo -n ${bri} > "/sys/class/backlight/${backlight_name}/brightness"
+                        logger 'AC unpluged'
                         ;;
                     00000001)
-						log "switching to power.adp power profile"
-						echo -n ${max_bri} > "/sys/class/backlight/${backlight_name}/brightness"
+                        logger 'AC pluged'
                         ;;
-					*) uhd $*;;
                 esac
                 ;;
             *)
                 logger "ACPI action undefined: $2"
                 ;;
         esac
-		;;
-	battery)
-		case $value in
-			*0) log "switching to power.adp power profile"
-				#	hprofile power.adp
-				;;
-			*1) log "switching to power.adp power profile"
-				#	hprofile power.adp;;
-				;;
-			*) uhd $*;;
-		esac
-		;;
-	button)
-		case $action in
-			lid)
-				case "$id" in
-					close) hibernate-ram;;
-					open) :;;
-					*) uhd $*;;
-				esac
-				;;
-			power) shutdown -H now;;
-			sleep) hibernate-ram;;
-			#mute) 
-			#	$alsa && $amixer toggle;;
-			#volumeup) 
-			#	$alsa && $amixer 3dB+
-			#	$oss && $ossmix +3;;
-			#volumedown) 
-			#	$alsa && $amixer 3dB-
-			#	$oss && $ossmix -3;;
-			*) uhd $*;;
-		esac
-		;;
-	cd)
-		case $action in
-			play) :;;
-			stop) :;;
-			prev) :;;
-			next) :;;
-			*) uhd $*;;
-		esac
-		;;
-	jack)
-		case $id in
-			*plug) :;;
-			*) uhd $*;;
-		esac
-		;;
-	video)
-		case $action in
-			displayoff) :;;
-			*) uhd $*;;
-		esac
-		;;
-	*) uhd $*;;
+        ;;
+    battery)
+        case "$2" in
+            BAT0)
+                case "$4" in
+                    00000000)
+                        logger 'Battery online'
+                        ;;
+                    00000001)
+                        logger 'Battery offline'
+                        ;;
+                esac
+                ;;
+            CPU0)
+                ;;
+            *)  logger "ACPI action undefined: $2" ;;
+        esac
+        ;;
+    button/lid)
+        case "$3" in
+            close)
+                logger 'LID closed'
+                ;;
+            open)
+                logger 'LID opened'
+                ;;
+            *)
+                logger "ACPI action undefined: $3"
+                ;;
+    esac
+    ;;
+    *)
+        logger "ACPI group/action undefined: $1 / $2"
+        ;;
 esac
- 
-unset alsa oss amixer ossmix group action device id
- 
-# vim:fenc=utf-8:ft=sh:ci:pi:sts=4:sw=4:ts=4:
+
+# vim:set ts=4 sw=4 ft=sh et:

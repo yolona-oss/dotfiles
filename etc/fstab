@@ -1,6 +1,10 @@
-UUID=bf5c57e9-678e-48fa-b8b8-ca6239952d91 /          f2fs  rw,noatime,discard,background_gc=on,inline_xattr,inline_data,inline_dentry,flush_merge,extent_cache,mode=adaptive,nocheckpoint_merge,fsync_mode=posix 0 1
-UUID=7502-9B0A                            /boot      vfat  rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=ascii,shortname=mixed,utf8,errors=remount-ro                                                 0 2
-UUID=ab0b2275-b723-4758-ab08-2ebedce0b1a4 /home      f2fs  rw,noatime,discard,background_gc=on,fsync_mode=posix                                                                                                  0 2
-
-UUID=db2369d5-ad00-49a9-9450-4b7c15bc295f /home/data ext4  rw,noatime                                                                                                                                            0 0
-tmpfs                                     /tmp       tmpfs defaults,nosuid                                                                                                                                       0 0
+# /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a device; this may
+# be used with UUID= as a more robust way to name devices that works even if
+# disks are added and removed. See fstab(5).
+#
+# <file system>             <mount point>  <type>  <options>  <dump>  <pass>
+UUID=dc81bf8e-e198-4edd-9f42-5827a205ee80 /              ext4    defaults,noatime 0 1
+tmpfs                                     /tmp           tmpfs   defaults,noatime,mode=1777 0 0
+UUID=db2369d5-ad00-49a9-9450-4b7c15bc295f /home/data     ext4    defaults,noatime 0 0
