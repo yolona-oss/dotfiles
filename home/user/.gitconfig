@@ -1,13 +1,11 @@
 [user]
-	name = siisgoo
+	name = yolona-oss
 	email = siisgoo@mail.ru
 [core]
-	editor = vim
+	editor = nvim
 [init]
 	defaultBranch = main
 [credential]
-	helper = 
-	helper = /usr/local/bin/git-credential-manager-core
 	credentialStore = plaintext
 [credential "https://dev.azure.com"]
 	useHttpPath = true

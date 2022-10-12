@@ -3,8 +3,8 @@
 #include <X11/XF86keysym.h>
 
 /* appearance */
-static const unsigned int borderpx  = 0;        /* border pixel of windows */
-static const unsigned int default_border = 0;   /* to switch back to default border after dynamic border resizing via keybinds */
+static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int default_border = 1;   /* to switch back to default border after dynamic border resizing via keybinds */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
@@ -25,7 +25,7 @@ static const int vertpadtab         = 33;
 static const int horizpadtabi       = 15;
 static const int horizpadtabo       = 15;
 static const int scalepreview       = 4;
-static const int tag_preview        = 0;        /* 1 means enable, 0 is off */
+static const int tag_preview        = 1;        /* 1 means enable, 0 is off */
 static const int colorfultag        = 1;        /* 0 means use SchemeSel for selected non vacant tag */
 
 static const char *fonts[]          = { "JetBrainsMono Nerd Font:style:medium:size=10",
@@ -53,7 +53,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static char *tags[] = {"", "", "", "", ""};
+static char *tags[] = { "", "", "", "", "" };
 // 
 
 static const char* eww[] = { "eww", "open" , "eww", NULL };
@@ -77,15 +77,18 @@ static const Rule rules[] = {
      *	WM_CLASS(STRING) = instance, class
      *	WM_NAME(STRING) = title
      */
-    /* class      instance    title       tags mask     iscentered   isfloating   monitor */
-    { "Firefox",  NULL,       NULL,       1 << 1,       1,           0,            1 },
-    { "qutebrowser", NULL,    NULL,       1 << 1,       1,           0,            1 },
-    { "IDE", NULL,    NULL,   1,       1,           0,            0 },
-    { "discord",  NULL,    NULL,   1 << 3,       1,           0,            1 },
-    { "TelegramDesktop", NULL, NULL, 1 << 3, 1, 0, 1 },
-    { "Steam", NULL,  NULL, 1 << 4, 1, 0, -1},
-    { "steam_app_", NULL,  NULL, 1 << 4, 1, 0, -1},
-    { "eww",      NULL,       NULL,       0,            0,           1,           -1 },
+    // class,            instance, title, tags mask, iscentred, isfloating, x,  y,   w,  h,  monitor
+    { "Firefox",         NULL,     NULL,  1 << 1,    1,         0,          -1, -1,  -1, -1, 1 },
+    { "qutebrowser",     NULL,     NULL,  1 << 1,    1,         0,          -1, -1,  -1, -1, 1 },
+    { "IDE",             NULL,     NULL,  1,         1,         0,          -1, -1,  -1, -1, 0 },
+    { "discord",         NULL,     NULL,  1 << 3,    1,         0,          -1, -1,  -1, -1, 1 },
+    { "TelegramDesktop", NULL,     NULL,  1 << 3,    1,         0,          -1, -1,  -1, -1, 1 },
+    { "Steam",           NULL,     NULL,  1 << 4,    1,         0,          -1, -1,  -1, -1, -1 },
+    { "steam_app_",      NULL,     NULL,  1 << 4,    1,         0,          -1, -1,  -1, -1, -1 },
+    { "eww",             NULL,     NULL,  0,         0,         1,          -1, -1,  -1, -1, -1 },
+    { "st-scratch",      NULL,     NULL,  0,         1,         1,          .2, .25, .6, .5, -1 },
+    { "mpv",             NULL,     NULL,  0,         1,         1,          -1, -1,  -1, -1, -1 },
+    { "Sxiv",            NULL,     NULL,  0,         1,         1,          -1, -1,  -1, -1, -1 },
 };
 
 /* layout(s) */
@@ -93,6 +96,7 @@ static const float mfact     = 0.50; /* factor of master area size [0.05..0.95] 
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
+static const scratchpad st_scratch = {.class = "st-scratch", .v = (char *[]){"st", "-c", "st-scratch", NULL}};
 
 #define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
 #include "functions.h"
@@ -134,7 +138,7 @@ static Key keys[] = {
         /* modifier                         key         function        argument */
 
         // brightness and audio 
-        {0,                     XF86XK_AudioMute,       spawn,          SHCMD("pamixer -t")},
+        {0,              XF86XK_AudioMute,              spawn,          SHCMD("pamixer -t")},
         {0,              XF86XK_AudioRaiseVolume,       spawn,          SHCMD("pamixer -i 5")},
         {0,              XF86XK_AudioLowerVolume,       spawn,          SHCMD("pamixer -d 5")},
         {0,              XF86XK_MonBrightnessDown,      spawn,          SHCMD("xbacklight -dec 5")},
@@ -149,6 +153,7 @@ static Key keys[] = {
 
         { MODKEY,                           XK_c,       spawn,          SHCMD("rofi -show drun") },
         { MODKEY,                           XK_Return,  spawn,          SHCMD("st")},
+        { MODKEY,		            XK_s,       togglescratch,  {.v = &st_scratch } },
         // { MODKEY,                           XK_Return, spawn,            SHCMD("st_pad && st")},
 
 

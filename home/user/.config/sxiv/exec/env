@@ -5,7 +5,7 @@ _cut() { # print shorted string by ${2} param
 }
 
 trash_dir="$HOME/.local/share/Trash"
-dstf=/tmp/sxiv_dst_dir
+dstf=/tmp/.sxiv_dst_dir
 dst_default=$XDG_PICTURES_DIR
 h=9
 w=100

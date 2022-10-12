@@ -10,6 +10,8 @@ settings:
     global: true
   content.autoplay:
     global: false
+  downloads.location.directory:
+    global: /home/xewii/downloads
   spellcheck.languages:
     global:
     - en-US

@@ -16,14 +16,14 @@ source "$HOME"/.config/environment
 # Merging another startup scripts
 if [[ -d "$HOME"/.bash ]]
 then
-	# Waka
-	# source "$HOME"/.bash/bash-wakatime/bash-wakatime.sh
+        # Waka
+        source "$HOME"/.bash/bash-wakatime/bash-wakatime.sh
 
-	for scrpt in "$HOME"/.bash/*.sh
-	do
-		source $scrpt
-	done
-	unset scrpt
+        for script in "$HOME"/.bash/*.sh
+        do
+                source "${script}"
+        done
+        unset scrpt
 fi
 
 # XDG variables declaration
@@ -44,7 +44,7 @@ shopt -s globstar		# "*" globing
 shopt -s autocd			# change dirs without cd
 shopt -s direxpand		# expanding var values in path
 shopt -s histverify		# showing last command before execute it
-shopt -s checkwinsize	# check terminal size on each command exec
+shopt -s checkwinsize   	# check terminal size on each command exec
 shopt -s histappend		# history appending, not overwriting
 shopt -s dotglob		# globing dot files
 shopt -s expand_aliases
@@ -57,23 +57,23 @@ export IGNOREEOF="2"	#
 
 # Merging bash-complition scripts
 if ! shopt -oq posix; then
-	if [[ -f /usr/share/bash-completion/bash_completion ]]; then
-		source /usr/share/bash-completion/bash_completion
-	elif [[ -f /etc/bash_completion ]]; then
-		source /etc/bash_completion
-	elif [[ -f ~/.bash_completion ]]; then
-		source ~/.bash_completion
-	fi
+        if [[ -f /usr/share/bash-completion/bash_completion ]]; then
+                source /usr/share/bash-completion/bash_completion
+        elif [[ -f /etc/bash_completion ]]; then
+                source /etc/bash_completion
+        elif [[ -f ~/.bash_completion ]]; then
+                source ~/.bash_completion
+        fi
 fi
 
 # Setting command prompt
 if [[ $TERM == dumb ]]; then
-    printf ""
+        printf ""
 elif [[ $TERM == linux ]]; then
-    printf ""
+        printf ""
 elif [[ ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
-    printf ""
-    # set_prompt
+        printf ""
+        # set_prompt
 fi
 
 
@@ -83,8 +83,8 @@ fi
 
 # If not running interactively, don't do anything
 case $- in
-  *i*) ;;
-    *) return;;
+        *i*) ;;
+        *) return;;
 esac
 
 # Path to the bash it configuration

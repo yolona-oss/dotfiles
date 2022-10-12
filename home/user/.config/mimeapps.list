@@ -4,7 +4,7 @@ x-scheme-handler/https=org.qutebrowser.qutebrowser.desktop
 x-scheme-handler/http=org.qutebrowser.qutebrowser.desktop
 text/=goneovim.desktop
 image/=sxiv-rifle.desktop
-x-scheme-handler/tg=telegramdesktop.desktop
+x-scheme-handler/tg=userapp-Telegram Desktop-GRB5S1.desktop
 tg=telegramdesktop.desktop
 video/=mpv.desktop
 image/jpg=sxiv-rifle.desktop
@@ -27,7 +27,7 @@ application/x-xdg-protocol-tg=telegramdesktop.desktop
 
 [Added Associations]
 application/zip=vim.desktop;
-x-scheme-handler/tg=userapp-Telegram Desktop-3JEV60.desktop;userapp-Telegram Desktop-IY2180.desktop;userapp-Telegram Desktop-ROXIN1.desktop;userapp-Telegram Desktop-YJVGT1.desktop;
+x-scheme-handler/tg=userapp-Telegram Desktop-3JEV60.desktop;userapp-Telegram Desktop-IY2180.desktop;userapp-Telegram Desktop-ROXIN1.desktop;userapp-Telegram Desktop-GRB5S1.desktop;
 x-scheme-handler/http=firefox.desktop;
 x-scheme-handler/https=firefox.desktop;
 text/html=firefox.desktop;
