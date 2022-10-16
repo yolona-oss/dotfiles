@@ -4,8 +4,10 @@
 # BASH interactitity check
 [[ $- != *i* ]] && return
 
-# Sourcing enviroment variables
+# Sourcing enviroment variables nahui
 source "$HOME"/.config/environment
+
+[[ -n $(which ninja) ]] && export CMAKE_GENERATOR=Ninja
 
 # WINEPREFIX path
 [[ -d "${HOME}"/games ]] && export WINEPREFIX="${HOME}/games/.wine"
@@ -93,8 +95,8 @@ export BASH_IT="/home/xewii/.bash_it"
 # Lock and Load a custom theme file.
 # Leave empty to disable theming.
 # location /.bash_it/themes/
-export BASH_IT_THEME='oh-my-posh'
-POSH_THEME="~/.poshthemes/clean-detailed.omp.json"
+export BASH_IT_THEME='powerline'
+POSH_THEME=$HOME'/.poshthemes/clean-detailed.omp.json'
 
 # Some themes can show whether `sudo` has a current token or not.
 # Set `$THEME_CHECK_SUDO` to `true` to check every prompt:

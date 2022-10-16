@@ -1,0 +1,4 @@
+#!/bin/bash
+
+#[[ -n $(which duskc) ]] && duskc run_command viewwsbyname 1
+st -c IDE -e nvim

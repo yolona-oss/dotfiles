@@ -10,4 +10,5 @@ dst_default=$XDG_PICTURES_DIR
 h=9
 w=100
 dialog_opts="--wmclass float --stdout --center"
-undo_stack=/tmp/sxiv_undo
+undo_stack=/tmp/._sxiv_undo
+undo_stack_tmp=/tmp/._sxiv_undo_tmp

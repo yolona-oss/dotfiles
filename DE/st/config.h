@@ -5,8 +5,8 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "JetBrainsMono Nerd Font :pixelsize=14:antialias=true:autohint=true";
-static char *font2[] = { "JetBrainsMono Nerd Font :pixelsize=14:antialias=true:autohint=true" };
+static char *font = "JetBrainsMono Nerd Font:pixelsize=13:antialias=true:autohint=true";
+static char *font2[] = { "JetBrainsMono Nerd Font:pixelsize=13:antialias=true:autohint=true" };
 static int borderpx = 0;
 
 /*
@@ -17,7 +17,7 @@ static int borderpx = 0;
  * 4: value of shell in /etc/passwd
  * 5: value of shell in config.h
  */
-static char *shell = "/bin/sh";
+static char *shell = "/bin/bash";
 char *utmp = NULL;
 char *stty_args = "stty -parenb -parodd -cmspar cs8 -hupcl -cstopb cread -clocal -crtscts -ignbrk -brkint -ignpar -parmrk -inpck -istrip -inlcr -igncr icrnl ixon -ixoff -iuclc -ixany -imaxbel iutf8 opost -olcuc -ocrnl onlcr -onocr -onlret -ofill -ofdel nl0 cr0 tab0 bs0 vt0 ff0 isig icanon iexten echo echoe echok -echonl -noflsh -xcase -tostop -echoprt echoctl echoke -flusho -extproc";
 
@@ -62,7 +62,7 @@ static uint su_timeout = 200;
  * blinking timeout (set to 0 to disable blinking) for the terminal blinking
  * attribute.
  */
-static unsigned int blinktimeout = 800;
+static unsigned int blinktimeout = 0;
 
 /*
  * interval (in milliseconds) between each successive call to ximspot. This
@@ -119,28 +119,28 @@ float alpha = 1.0;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
-  "#282828", /* hard contrast: #1d2021 / soft contrast: #32302f */
-  "#cc241d",
-  "#98971a",
-  "#d79921",
-  "#458588",
-  "#b16286",
-  "#689d6a",
-  "#a89984",
-  "#928374",
-  "#fb4934",
-  "#b8bb26",
-  "#fabd2f",
-  "#83a598",
-  "#d3869b",
-  "#8ec07c",
-  "#ebdbb2",
+  "#282C34", // s:black.gui
+  "#E06C75", // s:red.gui
+  "#98C379", // s:green.gui
+  "#E5C07B", // s:yellow.gui
+  "#61AFEF", // s:blue.gui
+  "#C678DD", // s:purple.gui
+  "#56B6C2", // s:cyan.gui
+  "#ABB2BF", // s:white.gui
+  "#3E4452", // s:visual_grey.gui
+  "#BE5046", // s:dark_red.gui
+  "#98C379", // s:green.gui " No dark version
+  "#D19A66", // s:dark_yellow.gui
+  "#61AFEF", // s:blue.gui " No dark version
+  "#C678DD", // s:purple.gui " No dark version
+  "#56B6C2", // s:cyan.gui " No dark version
+  "#5C6370", // s:comment_grey.gui
   [255] = 0,
   /* more colors can be added after 255 to use with DefaultXX */
   "#add8e6", /* 256 -> cursor */
   "#555555", /* 257 -> rev cursor*/
-  "#282828", /* 258 -> bg */
-  "#ffffff", /* 259 -> fg */
+  "#282C34", /* 258 -> bg */
+  "#ABB2BF", /* 259 -> fg */
 };
 
 
@@ -258,42 +258,42 @@ static char *copyoutput[] = { "/bin/sh", "-c", "st-copyout", "externalpipe", NUL
 
 static Shortcut shortcuts[] = {
   /* mask                 keysym          function        argument */
-  { XK_ANY_MOD,           XK_Break,       sendbreak,      {.i =  0} },
-  { ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
-  { ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
-  { XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
-  { MODKEY,              XK_comma,       zoom,           {.f = +1} },
-  { MODKEY,              XK_period,        zoom,           {.f = -1} },
-  { MODKEY,               XK_g,        zoomreset,      {.f =  0} },
-  { ControlMask | ShiftMask,               XK_C,           clipcopy,       {.i =  0} },
-  { ShiftMask,            XK_Insert,      clippaste,      {.i =  0} },
-  { ControlMask | ShiftMask,               XK_V,           clippaste,      {.i =  0} },
-  { XK_ANY_MOD,		Button2,	selpaste,	{.i =  0} },
-  { MODKEY,               XK_Num_Lock,    numlock,        {.i =  0} },
-  { ControlMask | ShiftMask,               XK_U,           iso14755,       {.i =  0} },
-  { ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
-  { ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
-  { MODKEY,               XK_Page_Up,     kscrollup,      {.i = -1} },
-  { MODKEY,               XK_Page_Down,   kscrolldown,    {.i = -1} },
-  { MODKEY,               XK_k,           kscrollup,      {.i =  1} },
-  { MODKEY,               XK_j,           kscrolldown,    {.i =  1} },
-  { MODKEY,               XK_Up,          kscrollup,      {.i =  1} },
-  { MODKEY,               XK_Down,        kscrolldown,    {.i =  1} },
-  { MODKEY,               XK_u,           kscrollup,      {.i = -1} },
-  { MODKEY,               XK_d,           kscrolldown,    {.i = -1} },
-  { MODKEY,		XK_s,		changealpha,	{.f = -0.05} },
-  { MODKEY,		XK_a,		changealpha,	{.f = +0.05} },
-  { MODKEY,		XK_m,		changealpha,	{.f = +2.00} },
-  { TERMMOD,              XK_Up,          zoom,           {.f = +1} },
-  { TERMMOD,              XK_Down,        zoom,           {.f = -1} },
-  { TERMMOD,              XK_K,           zoom,           {.f = +1} },
-  { TERMMOD,              XK_J,           zoom,           {.f = -1} },
-  { TERMMOD,              XK_U,           zoom,           {.f = +2} },
-  { TERMMOD,              XK_D,           zoom,           {.f = -2} },
-  { MODKEY,               XK_l,           externalpipe,   {.v = openurlcmd } },
-  { MODKEY,               XK_y,           externalpipe,   {.v = copyurlcmd } },
-  { MODKEY,               XK_o,           externalpipe,   {.v = copyoutput } },
-  { TERMMOD,              XK_Return,      newterm,        {.i =  0} },
+  { XK_ANY_MOD,              XK_Break,     sendbreak,     {.i =  0} },
+  { ControlMask,             XK_Print,     toggleprinter, {.i =  0} },
+  { ShiftMask,               XK_Print,     printscreen,   {.i =  0} },
+  { XK_ANY_MOD,              XK_Print,     printsel,      {.i =  0} },
+  { MODKEY,                  XK_comma,     zoom,          {.f = +1} },
+  { MODKEY,                  XK_period,    zoom,          {.f = -1} },
+  { MODKEY,                  XK_g,         zoomreset,     {.f =  0} },
+  { ControlMask | ShiftMask, XK_C,         clipcopy,      {.i =  0} },
+  { ShiftMask,               XK_Insert,    clippaste,     {.i =  0} },
+  { ControlMask | ShiftMask, XK_V,         clippaste,     {.i =  0} },
+  { XK_ANY_MOD,              Button2,      selpaste,      {.i =  0} },
+  { MODKEY,                  XK_Num_Lock,  numlock,       {.i =  0} },
+  { ControlMask | ShiftMask, XK_U,         iso14755,      {.i =  0} },
+  { ShiftMask,               XK_Page_Up,   kscrollup,     {.i = -1} },
+  { ShiftMask,               XK_Page_Down, kscrolldown,   {.i = -1} },
+  { MODKEY,                  XK_Page_Up,   kscrollup,     {.i = -1} },
+  { MODKEY,                  XK_Page_Down, kscrolldown,   {.i = -1} },
+  { MODKEY,                  XK_k,         kscrollup,     {.i =  1} },
+  { MODKEY,                  XK_j,         kscrolldown,   {.i =  1} },
+  { MODKEY,                  XK_Up,        kscrollup,     {.i =  1} },
+  { MODKEY,                  XK_Down,      kscrolldown,   {.i =  1} },
+  { MODKEY,                  XK_u,         kscrollup,     {.i = -1} },
+  { MODKEY,                  XK_d,         kscrolldown,   {.i = -1} },
+  { MODKEY,                  XK_s,         changealpha,   {.f = -0.05} },
+  { MODKEY,                  XK_a,         changealpha,   {.f = +0.05} },
+  { MODKEY,                  XK_m,         changealpha,   {.f = +2.00} },
+  { TERMMOD,                 XK_Up,        zoom,          {.f = +1} },
+  { TERMMOD,                 XK_Down,      zoom,          {.f = -1} },
+  { TERMMOD,                 XK_K,         zoom,          {.f = +1} },
+  { TERMMOD,                 XK_J,         zoom,          {.f = -1} },
+  { TERMMOD,                 XK_U,         zoom,          {.f = +2} },
+  { TERMMOD,                 XK_D,         zoom,          {.f = -2} },
+  { MODKEY,                  XK_l,         externalpipe,  {.v = openurlcmd } },
+  { MODKEY,                  XK_y,         externalpipe,  {.v = copyurlcmd } },
+  { MODKEY,                  XK_o,         externalpipe,  {.v = copyoutput } },
+  { TERMMOD,                 XK_Return,    newterm,       {.i =  0} },
 
 };
 

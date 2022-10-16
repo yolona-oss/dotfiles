@@ -1,0 +1,40 @@
+#!/bin/sh -e
+
+: "${YTDL_OPTS:='-o %(title)s.%(ext)s'}"
+: "${YTDLQ_DIR:=$PWD}"
+queue=$YTDLQ_DIR/queue
+
+usage() { >&2 echo "Usage: ytdlq [-a] [-d]" ; exit 1 ; }
+
+dl() {
+    log=$YTDLQ_DIR/ytdlq-$(printf '%s' "$1" | sed -e 's|.*./||' -e 's|&.*||').log
+
+    youtube-dl "$1" $YTDL_OPTS -c -R 50 \
+        --exec "rm -f \"$log\" ; \
+            notify-send -a YT \"{} has finished downloading\"" "$1" >"$log" 2>&1
+}
+
+start_daemon() {
+    while sleep 5 ; do
+        while [ -s "$queue" ] ; do
+            while ! ping -q -L -c 1 -s 1 yandex.ru >/dev/null ; do
+                sleep 30
+            done
+            read -r link < "$queue"
+            dl "$link" || printf '%s\n' "$link" >>"$queue".rej
+            sed -i '1d' "$queue"
+        done
+    done
+}
+
+case $1 in
+    -a)
+        [ "$2" ] || usage
+        printf '%s\n' "$2" >>"$queue"
+        ;;
+    -d)
+        start_daemon
+        ;;
+     *)
+         usage
+esac

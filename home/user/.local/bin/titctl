@@ -1,0 +1,346 @@
+#!/bin/bash
+#
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#                                   #
+#vvvvvvvvvvvv#                      #
+#   titctl   #                      #
+#^^^^^^^^^^^^#                      #
+#                                   #
+# Simple organization program       #
+# Using local files and sorting its #
+# Autogenerating todo list          #
+# Printing todo list                #
+#                                   #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#
+
+usage()
+{
+	printf "%q: -hmor -a [zipped file] (n) -l (sc)\n" "$(basename "${0}")"
+	printf "\n"
+	printf " -a [zipped file] (n)\tadd TIT sources to work directory and make todo list. If option "n" specified use next day\n"
+	printf " -m\t\t\t\t\tmake todo list\n"
+	printf " -l (sc)\t\t\tprint list of todo. "sc" argument mead use simple colors\n"
+	printf " -o [ID]\t\t\topen the lection number [ID]\n"
+	printf " -h\t\t\t\t\tshow this help\n"
+	printf "\nBy default always opening the list\n"
+}
+
+make_todo_list()
+{
+	subjects=(ИТ
+		ОСиС
+		ЭВМ
+		ДМ
+		ОАиП
+		"Основы экономики"
+		"Психология общения"
+		"Культура речи")
+	
+	tmpfile=$(mktemp)
+	i=0
+	for day in ${TIT_DIR}/${date_patter}
+	do
+
+		lections=()
+		find "$day" \( ! -regex '.*/\..*' \) -type f -print0 > ${tmpfile}
+		while IFS=$'\0'  read -r -d $'\0'; do
+			    lections+=("$REPLY")
+		done <${tmpfile}
+		rm -f ${tmpfile}
+
+		IFS=
+		for lection in ${lections[@]}
+		do
+			IFS=' '
+			if [[ -z $(grep "$lection" "$BD") ]]; then
+				let i++
+				prefix=$(grep -o -E "$date_patter" <<< "${lection}")
+				subj="$(basename "${lection}")"
+				for (( i = 0; i < ${#subjects[@]}; i++ ))
+				do
+					if [[ -n "$(grep -i "${subjects[$i]}" <<< "$subj")" ]]; then
+						subj="${subjects[$i]}.${subj##*.}"
+					fi
+				done
+
+				echo "Subject: \"${subj}\""
+				while read -p ":: Confirm subject name [yN]: " yn; do
+					if [[ ${yn} =~ [yY] ]]; then
+						break
+					fi
+					printf "subject: $subj\n"
+					read -p " Enter new: " subj
+				done
+
+				prefix+=" ${subj}"
+				ln -s "${lection}" "${TODO_DIR}/${prefix}" &&
+					echo "${lection}" >> "${BD}"
+				printf "Added $(basename "$lection")\n"
+			fi
+		done
+	done
+	
+	if (( ${i} > 0 )); then
+		printf "%q Lections\n" ${i}
+	else
+		printf "Nothing to do\n"
+		toprint=0
+	fi
+}
+
+pre_make_listdb()
+{
+	i=0
+	while read file
+	do
+		if [[ -n $(grep -i "зачет" <<< "$file") ]]; then
+			[[ ${printExam} == 0 ]] && continue
+		fi
+				base=$(basename "${file}")
+				date="$(echo ${base} | grep -o "^${date_patter}")"
+				lection="$(echo ${base} | sed "s/${date_patter}//g")"
+				# size="$(wc -l "${file}" | cut -d' ' -f 1)" # size by text lines
+				size="$(du -k "$(realpath "${file}")" | cut -f 1)"
+				printf "%3q %12s " "${i}" "${date}"
+				printf "%4q" "${size}"
+				printf "${lection}\n"
+				let i++
+	done <<< $(find "${TODO_DIR}" \( ! -regex '.*/\..*' \) -type l | sort -t'.' -k2,2 -k1)
+} > "${listdb}"
+
+make_listdb()
+{
+	pre_make_listdb
+}
+
+list()
+{
+		make_listdb
+		echo
+		printf '\x1b[1m'
+		printf "%3q %12q %4q %1q\n" "ID" "Date" "Size" "Lection"
+		printf '\x1b[36m'
+		cat "${listdb}"
+}
+
+make_colorized_list()
+{
+	i=0
+	exams=0
+	echo
+	size_field_len=4
+	printf "%3q %12q %${size_field_len}q %1q\n" "ID" "Date" "Size" "Lection"
+	while read file
+	do
+		if [[ -n $(grep -i "зачет" <<< "$file") ]]; then
+			let exams++
+			[[ ${printExam} == 0 ]] && continue
+		fi
+		normal='\x1b[0m'
+		fg='\x1b[30m'
+		bg='\x1b[47m'
+		atr='\x1b[1m'
+		if (( $i % 2 == 0 )); then
+			col=1
+			printf "${fg}${bg}${art}"
+		else
+			col=0
+			printf "${normal}"
+		fi
+
+		linelen=0
+		base=$(basename "${file}")
+		date="$(echo ${base} | grep -o "^${date_patter}")"
+		lection="$(echo ${base} | sed "s/${date_patter} //g")"
+
+		# size="$(wc -l "${file}" | cut -d' ' -f 1)"
+		size="$(du -k "$(realpath "${file}")" | cut -f 1)"
+        size=${0:=$size}
+		linelen=$(( (${#id}+2) + (${#date}+3) + (size_field_len+1) + (${#lection}+1) ))
+		printf "%3q %12q " "${i}" "${date}" 
+		if (( ${size} < 50 )); then
+			printf "\x1b[32m"
+		elif (( ${size} > 50 )) && (( ${size} < 500 )); then
+			printf "\x1b[33m"
+		elif (( ${size} > 500 )); then
+			printf "\x1b[31m"
+		fi
+		printf "%${size_field_len}q " "${size}"
+		(( ${col} == 1 )) && printf "${fg}" || printf "$normal"
+		printf "${lection}"
+		
+		stp=$(( $(tput cols) - (linelen+1) ))
+		(( $col == 1 )) && for null in $(seq ${stp}); do
+			printf " "
+		done
+		printf "${normal}"
+		printf "\n"
+		let i++
+	done <<< $(find "${TODO_DIR}" \( ! -regex '.*/\..*' \) -type l | sort -t'.' -k2,2 -k1)
+
+	printf "\n%q Tasks / %q Exam\t\t%q Done\n" ${i} ${exams} $(( $(grep -E '.docx|.pdf|.DOCX' ${BD} | wc -l) - i ))
+	printf "\x1b[0m"
+} > ${currentlist}
+
+colorized_list()
+{
+	make_colorized_list
+	term_lines=$(tput lines)
+	list_lines=$(wc -l < ${currentlist})
+	if (( ${term_lines} < ${list_lines} ))
+	then
+		${PAGER:-less} ${currentlist}
+	else
+		cat ${currentlist}
+	fi
+}
+
+TIT_DIR="${HOME}/Documents/TIT"
+TODO_DIR="${TIT_DIR}/toDo"
+ARCHIVE_DIR="${TIT_DIR}/Archives"
+BD="$TODO_DIR/.db"
+listdb="${TIT_DIR}/.listdb"
+listhash="${TIT_DIR}/.hash"
+currentlist="${TIT_DIR}/.list"
+date_patter=[0-9][0-9].[0-9][0-9].20[0-9][0-9]
+
+toprint=1
+printExam=0
+
+[[ -d ${TIT_DIR} ]] && mkdir -p ${TIT_DIR}
+[[ -d ${TODO_DIR} ]] && mkdir -p ${TODO_DIR}
+[[ -d ${ARCHIVE_DIR} ]] && mkdir -p ${ARCHIVE_DIR}
+
+OPTSET="a:mo:lr:i"
+while getopts ${OPTSET} OPT
+do
+	case ${OPT} in
+		i)
+				printExam=1 ;;
+		a)
+			zip="$(realpath "${OPTARG}")"
+
+			if ! [[ -r "${zip}" ]]; then
+				echo "Error: no such file: ${zip}"
+				exit 1
+			fi
+			shift 2
+
+			date="$(date '+%d.%m.%Y')"
+			if [[ "${1}" == "n" ]]; then
+				tmp="$(awk -F'.' 'BEGIN {OFS = FS} {$1=$1+1; print $0}' <<< "$date")"
+				date="${tmp}"
+			fi
+
+			extr_dir=$(mktemp -d)
+			name=$(unzip -l "${zip}" | awk -F"   " 'NR == 4 {print $NF}' | sed 's/\///g')
+			unzip -d "${extr_dir}" "${zip}" > /dev/null
+
+			if ! [[ -r "${extr_dir}/${name}" ]]; then
+				echo "Error: unzip error"
+				rm -r ${extr_dir}
+				exit 1
+			fi
+
+			mv "${zip}" "${ARCHIVE_DIR}/$(basename "${zip}")"
+			mv "${extr_dir}/${name}" "${TIT_DIR}/${date}"
+
+			rm -r "${extr_dir}"
+
+			archf=0
+			mainf=0
+			if ! [[ -r "${ARCHIVE_DIR}/$(basename "${zip}")" ]]; then
+				archf=1
+				echo -e "\t$(tput setaf 3)Error$(tput setaf 7): zip not archived!"
+			fi
+			if ! [[ -r "${TIT_DIR}/${date}" ]]; then
+				mainf=1
+				echo -e "\t$(tput setaf 1)Critical$(tput setaf 7): there's nothing added!"
+			fi
+
+			(( $(( mainf + archf )) == 0 )) && echo "Success!"
+
+			make_todo_list
+			;;
+		m)
+			make_todo_list
+			;;
+		l)
+			shift
+			if [[ $1 == sc ]]; then
+				list
+			else
+				colorized_list
+			fi
+			
+			toprint=0
+			;;
+		o)
+			make_listdb
+			id=${OPTARG}
+			if ! [[ ${id} =~ [0-9] ]]; then
+			       echo "Error: invalide ID: $id"
+			       exit 1
+			fi
+			date="$(awk -v num=${id} '$1 == num {print $2}' "${listdb}")"
+			name="$(awk -v num=${id} '$1 == num {for (i=4; i<NF; i++) printf $i " "; print $NF}' "${listdb}")"
+			tmp="${date} ${name}"
+			echo "${tmp}"
+			file="$(find "${TODO_DIR}" -name "$tmp")"
+			if ! [[ -f "${file}" ]]; then
+				echo "No such file: $file"
+				exit 1
+			elif ! [[ -r "${file}" ]]; then
+				echo "File is not readable: $file"
+			fi
+			sufix=${name##*.}
+			printf "Opening \"%q\" lection date: %q" "${name%.${sufix}}" "${date}"
+			xdg-open "${file}" &>/dev/null &
+
+			toprint=0
+			;;
+		r)
+			make_listdb
+			id=${OPTARG}
+			if ! [[ ${id} =~ [0-9] ]]; then
+			       echo "Error: invalide ID: $id"
+			       exit 1
+			fi
+			date="$(awk -v num=${id} '$1 == num {print $2}' "${listdb}")"
+			name="$(awk -v num=${id} '$1 == num {for (i=4; i<NF; i++) printf $i " "; print $NF}' "${listdb}")"
+			tmp="${date} ${name}"
+			file="$(find "${TODO_DIR}" -name "$tmp")"
+			if ! [[ -f "${file}" ]]; then
+				echo "No such file: $file"
+				exit 1
+			fi
+			printf "Are you sure to delete %q lection on %q? [yN] " "$name" "$date"
+			read yn
+			case $yn in
+				[yY])
+					rm "${file}"
+					printf "Deletion successfully complited\n"
+					;;
+				[nN])
+					printf "Aborting\n"
+					;;
+				*)
+					printf "Aborting\n"
+					;;
+			esac
+			;;
+		h)
+			usage
+			exit 1
+			;;
+		*)
+			usage
+			exit 1
+			;;
+	esac
+done
+
+(( ${toprint} == 1 )) && colorized_list
+
+exit 0

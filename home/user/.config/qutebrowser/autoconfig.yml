@@ -8,10 +8,30 @@ config_version: 2
 settings:
   auto_save.session:
     global: true
+  backend:
+    global: webengine
+  colors.webpage.preferred_color_scheme:
+    global: dark
   content.autoplay:
     global: false
+  content.blocking.method:
+    global: both
+  content.javascript.can_open_tabs_automatically:
+    global: false
+  content.pdfjs:
+    global: true
   downloads.location.directory:
     global: /home/xewii/downloads
+  fonts.default_family:
+    global: JetBrains Mono
+  fonts.default_size:
+    global: 10pt
+  fonts.prompts:
+    global: default_size Hack
+  hints.leave_on_load:
+    global: true
+  session.lazy_restore:
+    global: true
   spellcheck.languages:
     global:
     - en-US

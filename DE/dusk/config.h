@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx       = 5;   /* border pixel of windows */
+static const unsigned int borderpx       = 1;   /* border pixel of windows */
 static const unsigned int snap           = 32;  /* snap pixel */
 static const unsigned int gappih         = 5;   /* horiz inner gap between windows */
 static const unsigned int gappiv         = 5;   /* vert inner gap between windows */
@@ -15,8 +15,8 @@ static unsigned int attachdefault        = AttachAside; // AttachMaster, AttachA
 static const int initshowbar             = 1;   /* 0 means no bar */
 
 static const int bar_height              = 0;   /* 0 means derive from font, >= 1 explicit height */
-static const int vertpad                 = borderpx;  /* vertical (outer) padding of bar */
-static const int sidepad                 = borderpx;  /* horizontal (outer) padding of bar */
+static const int vertpad                 = 5;  /* vertical (outer) padding of bar */
+static const int sidepad                 = 5;  /* horizontal (outer) padding of bar */
 
 static const int iconsize                = 16;  /* icon size */
 static const int iconspacing             = 5;   /* space between icon and title */
@@ -27,15 +27,15 @@ static int floatposgrid_x                = 5;   /* float grid columns */
 static int floatposgrid_y                = 5;   /* float grid rows */
 
 static const int horizpadbar             = 2;   /* horizontal (inner) padding for statusbar (increases lrpad) */
-static const int vertpadbar              = 0;   /* vertical (inner) padding for statusbar (increases bh, overridden by bar_height) */
+static const int vertpadbar              = 1;   /* vertical (inner) padding for statusbar (increases bh, overridden by bar_height) */
 
 static const char slopspawnstyle[]       = "-t 0 -c 0.92,0.85,0.69,0.3 -o"; /* do NOT define -f (format) here */
 static const char slopresizestyle[]      = "-t 0 -c 0.92,0.85,0.69,0.3"; /* do NOT define -f (format) here */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const char *toggle_float_pos      = "50% 50% 80% 80%"; // default floating position when triggering togglefloating
 static const double defaultopacity       = 0;   /* client default opacity, e.g. 0.75. 0 means don't apply opacity */
-static const double moveopacity          = 0;   /* client opacity when being moved, 0 means don't apply opacity */
-static const double resizeopacity        = 0;   /* client opacity when being resized, 0 means don't apply opacity */
+static const double moveopacity          = .9;   /* client opacity when being moved, 0 means don't apply opacity */
+static const double resizeopacity        = .9;   /* client opacity when being resized, 0 means don't apply opacity */
 static const double placeopacity         = 0;   /* client opacity when being placed, 0 means don't apply opacity */
 
 /* Indicators: see lib/bar_indicators.h for options */
@@ -69,34 +69,34 @@ static uint64_t functionality = 0
 	|Swallow // allows terminals to swallow X applications started from the command line
 	|SwallowFloating // means swallow floating windows by default
 	|CenteredWindowName // center the window titles on the bar
-	|BarActiveGroupBorderColor // use border color of active group, otherwise title scheme is used
-	|BarMasterGroupBorderColor // use border color of master group, otherwise title scheme is used
+//	|BarActiveGroupBorderColor // use border color of active group, otherwise title scheme is used
+//	|BarMasterGroupBorderColor // use border color of master group, otherwise title scheme is used
 	|FlexWinBorders // use the SchemeFlex* color schemes, falls back to SchemeTitle* if disabled
 	|SpawnCwd // spawn applications in the currently selected client's working directory
 	|ColorEmoji // enables color emoji support (removes Xft workaround)
 //	|Status2DNoAlpha // option to not use alpha when drawing status2d status
-//  |BarBorder // draw a border around the bar
-//  |BarPadding // add vertical and side padding as per vertpad and sidepad variables above
-	|NoBorders // as per the noborder patch, show no border when only one client in tiled mode
+        |BarBorder // draw a border around the bar
+        |BarPadding // add vertical and side padding as per vertpad and sidepad variables above
+//	|NoBorders // as per the noborder patch, show no border when only one client in tiled mode
 	|Warp // warp cursor to currently focused window
-	|FocusedOnTop // allows focused window to stay on top of other windows
+//	|FocusedOnTop // allows focused window to stay on top of other windows
 //	|DecorationHints // omit drawing the window border if the applications asks not to
 //	|FocusOnNetActive //  allow windows demanding attention to receive focus automatically
 	|AllowNoModifierButtons // allow some window operations, like move and resize, to work without having to hold down a modifier key
 	|CenterSizeHintsClients // center tiled clients subject to size hints within their tiled area
 //	|ResizeHints // respect size hints also when windows are tiled
 	|SnapToWindows // snap to windows when moving floating clients
-//	|SortScreens // monitors are numbered from left to right
+	|SortScreens // monitors are numbered from left to right
 //	|ViewOnWs // follow a window to the workspace it is being moved to
 	|Xresources // add support for changing colours via Xresources
 //	|Debug // enables additional debug output
 //	|AltWorkspaceIcons // show the workspace name instead of the icons
-//	|GreedyMonitor // disables swap of workspaces between monitors
+	|GreedyMonitor // disables swap of workspaces between monitors
 	|SmartLayoutConvertion // automatically adjust layout based on monitor orientation when moving a workspace from one monitor to another
 	|AutoHideScratchpads // automatically hide open scratchpads when moving to another workspace
-	|RioDrawIncludeBorders // indicates whether the area drawn using slop includes the window borders
-	|RioDrawSpawnAsync // spawn the application alongside rather than after drawing area using slop
-//	|RestrictFocusstackToMonitor // restrict focusstack to only operate within the monitor, otherwise focus can drift between monitors
+//	|RioDrawIncludeBorders // indicates whether the area drawn using slop includes the window borders
+//	|RioDrawSpawnAsync // spawn the application alongside rather than after drawing area using slop
+	|RestrictFocusstackToMonitor // restrict focusstack to only operate within the monitor, otherwise focus can drift between monitors
 	|WinTitleIcons // adds application icons to window titles in the bar
 //	|WorkspaceLabels // adds the class of the master client next to the workspace icon
 	|WorkspacePreview // adds preview images when hovering workspace icons in the bar
@@ -111,10 +111,10 @@ static int flexwintitle_separator        = 2;  // width of client separator
 static const char *fonts[]               = { "JetBrainsMono Nerd Font:pixelsize=14:antialias=true:autohint=true" };
 static       char dmenufont[]            = "JetBrainsMono Nerd Font:pixelsize=14:antialias=true:autohint=true";
 
-static char dmenunormfgcolor[] = "#BE89AE";
-static char dmenunormbgcolor[] = "#180A13";
-static char dmenuselfgcolor[] = "#FFF7D4";
-static char dmenuselbgcolor[] = "#440000";
+static char dmenunormfgcolor[] = "#61afef";
+static char dmenunormbgcolor[] = "#2e323a";
+static char dmenuselfgcolor[] = "#1e222a";
+static char dmenuselbgcolor[] = "#61afef";
 
 /* Xresources preferences to load at startup. */
 static const ResourcePref resources[] = {
@@ -132,84 +132,94 @@ static const unsigned int alphas[SchemeLast][3] = {
 
 static char *colors[SchemeLast][ColCount] = {
 	/*                       fg         bg         border     resource prefix */
-	[SchemeNorm]         = { "#BE89AE", "#180A13", "#444444", "norm" },
-	[SchemeSel]          = { "#FFF7D4", "#440000", "#440000", "sel" },
-	[SchemeTitleNorm]    = { "#C6BDBD", "#180A13", "#180A13", "titlenorm" },
-	[SchemeTitleSel]     = { "#FFF7D4", "#440000", "#440000", "titlesel" },
-	[SchemeWsNorm]       = { "#BE89AE", "#180A13", "#000000", "wsnorm" },
-	[SchemeWsVisible]    = { "#BE89AE", "#5E294B", "#000000", "wsvis" },
-	[SchemeWsSel]        = { "#D8B2CD", "#6F3A5C", "#000000", "wssel" },
-	[SchemeWsOcc]        = { "#BE89AE", "#180A13", "#000000", "wsocc" },
-	[SchemeHidNorm]      = { "#c278b6", "#222222", "#000000", "hidnorm" },
-	[SchemeHidSel]       = { "#D288C6", "#111111", "#000000", "hidsel" },
-	[SchemeUrg]          = { "#bbbbbb", "#222222", "#d10f3f", "urg" },
-	[SchemeMarked]       = { "#615656", "#ECB820", "#ECB820", "marked" },
-	[SchemeScratchNorm]  = { "#FFF7D4", "#664C67", "#77547E", "scratchnorm" },
-	[SchemeScratchSel]   = { "#FFF7D4", "#77547E", "#894B9F", "scratchsel" },
-	[SchemeFlexActTTB]   = { "#FFF7D4", "#440000", "#440000", "actTTB" },
-	[SchemeFlexActLTR]   = { "#FFF7D4", "#440044", "#440044", "actLTR" },
-	[SchemeFlexActMONO]  = { "#FFF7D4", "#000044", "#000044", "actMONO" },
-	[SchemeFlexActGRID]  = { "#FFF7D4", "#004400", "#004400", "actGRID" },
-	[SchemeFlexActGRIDC] = { "#FFF7D4", "#004400", "#004400", "actGRIDC" },
-	[SchemeFlexActGRD1]  = { "#FFF7D4", "#004400", "#004400", "actGRD1" },
-	[SchemeFlexActGRD2]  = { "#FFF7D4", "#004400", "#004400", "actGRD2" },
-	[SchemeFlexActGRDM]  = { "#FFF7D4", "#507711", "#507711", "actGRDM" },
-	[SchemeFlexActHGRD]  = { "#FFF7D4", "#b97711", "#b97711", "actHGRD" },
-	[SchemeFlexActDWDL]  = { "#FFF7D4", "#004444", "#004444", "actDWDL" },
-	[SchemeFlexActDWDLC] = { "#FFF7D4", "#004444", "#004444", "actDWDLC" },
-	[SchemeFlexActSPRL]  = { "#FFF7D4", "#444400", "#444400", "actSPRL" },
-	[SchemeFlexActSPRLC] = { "#FFF7D4", "#444400", "#444400", "actSPRLC" },
-	[SchemeFlexActTTMI]  = { "#FFF7D4", "#B81616", "#B81616", "actTTMI" },
-	[SchemeFlexActTTMIC] = { "#FFF7D4", "#B81616", "#B81616", "actTTMIC" },
-	[SchemeFlexActFloat] = { "#FFF7D4", "#4C314C", "#4C314C", "actfloat" },
-	[SchemeFlexInaTTB]   = { "#C6BDBD", "#330000", "#330000", "normTTB" },
-	[SchemeFlexInaLTR]   = { "#C6BDBD", "#330033", "#330033", "normLTR" },
-	[SchemeFlexInaMONO]  = { "#C6BDBD", "#000033", "#000033", "normMONO" },
-	[SchemeFlexInaGRID]  = { "#C6BDBD", "#003300", "#003300", "normGRID" },
-	[SchemeFlexInaGRIDC] = { "#C6BDBD", "#003300", "#003300", "normGRIDC" },
-	[SchemeFlexInaGRD1]  = { "#C6BDBD", "#003300", "#003300", "normGRD1" },
-	[SchemeFlexInaGRD2]  = { "#C6BDBD", "#003300", "#003300", "normGRD2" },
-	[SchemeFlexInaGRDM]  = { "#C6BDBD", "#506600", "#506600", "normGRDM" },
-	[SchemeFlexInaHGRD]  = { "#C6BDBD", "#b96600", "#b96600", "normHGRD" },
-	[SchemeFlexInaDWDL]  = { "#C6BDBD", "#003333", "#003333", "normDWDL" },
-	[SchemeFlexInaDWDLC] = { "#C6BDBD", "#003333", "#003333", "normDWDLC" },
-	[SchemeFlexInaSPRL]  = { "#C6BDBD", "#333300", "#333300", "normSPRL" },
-	[SchemeFlexInaSPRLC] = { "#C6BDBD", "#333300", "#333300", "normSPRLC" },
-	[SchemeFlexInaTTMI]  = { "#C6BDBD", "#B32727", "#B32727", "normTTMI" },
-	[SchemeFlexInaTTMIC] = { "#C6BDBD", "#B32727", "#B32727", "normTTMIC" },
-	[SchemeFlexInaFloat] = { "#C6BDBD", "#4C314C", "#4C314C", "normfloat" },
-	[SchemeFlexSelTTB]   = { "#FFF7D4", "#550000", "#550000", "selTTB" },
-	[SchemeFlexSelLTR]   = { "#FFF7D4", "#550055", "#550055", "selLTR" },
-	[SchemeFlexSelMONO]  = { "#FFF7D4", "#212171", "#212171", "selMONO" },
-	[SchemeFlexSelGRID]  = { "#FFF7D4", "#005500", "#005500", "selGRID" },
-	[SchemeFlexSelGRIDC] = { "#FFF7D4", "#005500", "#005500", "selGRIDC" },
-	[SchemeFlexSelGRD1]  = { "#FFF7D4", "#005500", "#005500", "selGRD1" },
-	[SchemeFlexSelGRD2]  = { "#FFF7D4", "#005500", "#005500", "selGRD2" },
-	[SchemeFlexSelGRDM]  = { "#FFF7D4", "#508822", "#508822", "selGRDM" },
-	[SchemeFlexSelHGRD]  = { "#FFF7D4", "#b98822", "#b98822", "selHGRD" },
-	[SchemeFlexSelDWDL]  = { "#FFF7D4", "#005555", "#005555", "selDWDL" },
-	[SchemeFlexSelDWDLC] = { "#FFF7D4", "#005555", "#005555", "selDWDLC" },
-	[SchemeFlexSelSPRL]  = { "#FFF7D4", "#555500", "#555500", "selSPRL" },
-	[SchemeFlexSelSPRLC] = { "#FFF7D4", "#555500", "#555500", "selSPRLC" },
-	[SchemeFlexSelTTMI]  = { "#FFF7D4", "#C91717", "#C91717", "selTTMI" },
-	[SchemeFlexSelTTMIC] = { "#FFF7D4", "#C91717", "#C91717", "selTTMIC" },
-	[SchemeFlexSelFloat] = { "#FFF7D4", "#5C415C", "#5C415C", "selfloat" },
+	[SchemeNorm]         = { "#6d8dad", "#1e222a", "#61afef", "norm" },
+	[SchemeSel]          = { "#1e222a", "#61afef", "#61afef", "sel" },
+
+	[SchemeTitleNorm]    = { "#1e222a", "#2e323a", "#2e323a", "titlenorm" },
+	[SchemeTitleSel]     = { "#1e222a", "#61afef", "#61afef", "titlesel" },
+
+	[SchemeWsNorm]       = { "#6d8dad", "#1e222a", "#1e222a", "wsnorm" },
+	[SchemeWsVisible]    = { "#545862", "#6d8dad", "#545862", "wsvis" },
+	[SchemeWsSel]        = { "#545862", "#61afef", "#545862", "wssel" },
+	[SchemeWsOcc]        = { "#6d8dad", "#2e323a", "#1e222a", "wsocc" },
+
+	[SchemeHidNorm]      = { "#1e222a", "#545862", "#2e323a", "hidnorm" },
+	[SchemeHidSel]       = { "#6d8dad", "#61afef", "#61afef", "hidsel" },
+	[SchemeUrg]          = { "#1e222a", "#6d8dad", "#61afef", "urg" },
+
+	[SchemeMarked]       = { "#1e222a", "#e06c75", "#6d8dad", "marked" },
+
+	[SchemeScratchNorm]  = { "#1e222a", "#6d8dad", "#6d8dad", "scratchnorm" },
+	[SchemeScratchSel]   = { "#1e222a", "#61afef", "#61afef", "scratchsel" },
+
+	[SchemeFlexActTTB]   = { "#6d8dad", "#1e222a", "#545862", "actTTB" },
+	[SchemeFlexActLTR]   = { "#6d8dad", "#1e222a", "#545862", "actLTR" },
+	[SchemeFlexActMONO]  = { "#6d8dad", "#1e222a", "#545862", "actMONO" },
+	[SchemeFlexActGRID]  = { "#6d8dad", "#1e222a", "#545862", "actGRID" },
+	[SchemeFlexActGRIDC] = { "#6d8dad", "#1e222a", "#545862", "actGRIDC" },
+	[SchemeFlexActGRD1]  = { "#6d8dad", "#1e222a", "#545862", "actGRD1" },
+	[SchemeFlexActGRD2]  = { "#6d8dad", "#1e222a", "#545862", "actGRD2" },
+	[SchemeFlexActGRDM]  = { "#6d8dad", "#1e222a", "#545862", "actGRDM" },
+	[SchemeFlexActHGRD]  = { "#6d8dad", "#1e222a", "#545862", "actHGRD" },
+	[SchemeFlexActDWDL]  = { "#6d8dad", "#1e222a", "#545862", "actDWDL" },
+	[SchemeFlexActDWDLC] = { "#6d8dad", "#1e222a", "#545862", "actDWDLC" },
+	[SchemeFlexActSPRL]  = { "#6d8dad", "#1e222a", "#545862", "actSPRL" },
+	[SchemeFlexActSPRLC] = { "#6d8dad", "#1e222a", "#545862", "actSPRLC" },
+	[SchemeFlexActTTMI]  = { "#6d8dad", "#1e222a", "#545862", "actTTMI" },
+	[SchemeFlexActTTMIC] = { "#6d8dad", "#1e222a", "#545862", "actTTMIC" },
+	[SchemeFlexActFloat] = { "#6d8dad", "#1e222a", "#545862", "actfloat" },
+
+	[SchemeFlexInaTTB]   = { "##61afef", "#2e323a", "#545862", "normTTB" },
+	[SchemeFlexInaLTR]   = { "##61afef", "#2e323a", "#545862", "normLTR" },
+	[SchemeFlexInaMONO]  = { "##61afef", "#2e323a", "#545862", "normMONO" },
+	[SchemeFlexInaGRID]  = { "##61afef", "#2e323a", "#545862", "normGRID" },
+	[SchemeFlexInaGRIDC] = { "##61afef", "#2e323a", "#545862", "normGRIDC" },
+	[SchemeFlexInaGRD1]  = { "##61afef", "#2e323a", "#545862", "normGRD1" },
+	[SchemeFlexInaGRD2]  = { "##61afef", "#2e323a", "#545862", "normGRD2" },
+	[SchemeFlexInaGRDM]  = { "##61afef", "#2e323a", "#545862", "normGRDM" },
+	[SchemeFlexInaHGRD]  = { "##61afef", "#2e323a", "#545862", "normHGRD" },
+	[SchemeFlexInaDWDL]  = { "##61afef", "#2e323a", "#545862", "normDWDL" },
+	[SchemeFlexInaDWDLC] = { "##61afef", "#2e323a", "#545862", "normDWDLC" },
+	[SchemeFlexInaSPRL]  = { "##61afef", "#2e323a", "#545862", "normSPRL" },
+	[SchemeFlexInaSPRLC] = { "##61afef", "#2e323a", "#545862", "normSPRLC" },
+	[SchemeFlexInaTTMI]  = { "##61afef", "#2e323a", "#545862", "normTTMI" },
+	[SchemeFlexInaTTMIC] = { "##61afef", "#2e323a", "#545862", "normTTMIC" },
+	[SchemeFlexInaFloat] = { "##61afef", "#2e323a", "#545862", "normfloat" },
+
+	[SchemeFlexSelTTB]   = { "#1e222a", "#61afef", "#6d8dad", "selTTB" },
+	[SchemeFlexSelLTR]   = { "#1e222a", "#61afef", "#6d8dad", "selLTR" },
+	[SchemeFlexSelMONO]  = { "#1e222a", "#61afef", "#6d8dad", "selMONO" },
+	[SchemeFlexSelGRID]  = { "#1e222a", "#61afef", "#6d8dad", "selGRID" },
+	[SchemeFlexSelGRIDC] = { "#1e222a", "#61afef", "#6d8dad", "selGRIDC" },
+	[SchemeFlexSelGRD1]  = { "#1e222a", "#61afef", "#6d8dad", "selGRD1" },
+	[SchemeFlexSelGRD2]  = { "#1e222a", "#61afef", "#6d8dad", "selGRD2" },
+	[SchemeFlexSelGRDM]  = { "#1e222a", "#61afef", "#6d8dad", "selGRDM" },
+	[SchemeFlexSelHGRD]  = { "#1e222a", "#61afef", "#6d8dad", "selHGRD" },
+	[SchemeFlexSelDWDL]  = { "#1e222a", "#61afef", "#6d8dad", "selDWDL" },
+	[SchemeFlexSelDWDLC] = { "#1e222a", "#61afef", "#6d8dad", "selDWDLC" },
+	[SchemeFlexSelSPRL]  = { "#1e222a", "#61afef", "#6d8dad", "selSPRL" },
+	[SchemeFlexSelSPRLC] = { "#1e222a", "#61afef", "#6d8dad", "selSPRLC" },
+	[SchemeFlexSelTTMI]  = { "#1e222a", "#61afef", "#6d8dad", "selTTMI" },
+	[SchemeFlexSelTTMIC] = { "#1e222a", "#61afef", "#6d8dad", "selTTMIC" },
+	[SchemeFlexSelFloat] = { "#1e222a", "#61afef", "#6d8dad", "selfloat" },
 };
 
 static const char *const autostart[] = {
 	/* "st", "-c", "mpc", "-e", "ncmpcpp",	NULL, //mpd client */
-	"picom",            "--config",   "/home/xewii/.config/picom.conf", NULL, //compositor
+	"picom",            "--config",   "/home/xewii/.config/picom.conf", NULL,  //compositor
 	"slstatus",         NULL,         //status bar updater
-	"sh",               "-c",         "/home/xewii/.fehbg",             NULL, //wallpaper
-	"st",               "-c",         "IDE",                            "-e", "nvim", NULL, //IDE
-        "qutebrowser",      NULL,
+	"sh",               "-c",         "/home/xewii/.fehbg",             NULL,  //wallpaper
+        "IDE",              NULL,
+	// "st",               "-c",         "IDE",                            "-e",  "nvim", NULL, //IDE
+        // "qutebrowser",      NULL,
+        "xset",             "r",          "rate",                           "400", "30",   NULL,
 	"dunst",            NULL,         //notification daemon
 	"notmon",           NULL,         //sys monitor
 	"xbanish",          NULL,         //mouse hidder
 	"autocutsel",       NULL,         //clipboard sync
 	"autocutsel",       "-selection", "PRIMARY",                        NULL,
 	"clipmenud",        NULL,         //clipboard buffer manager
-	"telegram-desktop", NULL,
+	// "telegram-desktop", NULL,
 	NULL                //terminate
 };
 
@@ -249,12 +259,13 @@ static const Rule clientrules[] = {
 	{ .instance = "spterm (e)", .scratchkey = 'e', .flags = Floating },
 	{ .instance = "spfm (r)", .scratchkey = 'r', .flags = Floating },
 	{ .class = "discord", .workspace = "8", .flags = Centered },
-	{ .class = "TelegramDesktop", .workspace = "8", .flags = AttachMaster },
+	{ .class = "telegram-desktop", .workspace = "8", .flags = Floating },
 	{ .class = "IDE", .workspace = "1", .flags = Terminal },
 	{ .class = "Gimp", .workspace = "9", .flags = Floating|SwitchWorkspace },
 	{ .class = "firefox", .workspace = "7", .flags = AttachMaster },
 	{ .class = "Luakit", .workspace = "4", .flags = Centered },
 	{ .class = "qutebrowser", .workspace = "4", .flags = AlwaysOnTop|Centered },
+	{ .title = "Steam", .workspace = "5", .flags = Floating|Centered },
 	{ .class = "Steam", .workspace = "5", .flags = Floating|Centered },
 	{ .class = "steam_app_", .workspace = "5", .flags = SteamGame|IgnoreCfgReqPos|Floating|Centered|NoBorders },
 	{ .role = "pop-up", .flags = AlwaysOnTop|Floating|Centered },
@@ -493,8 +504,8 @@ static const char *dmenucmd[] = {
     "-sf", dmenuselfgcolor,
     NULL
 };
-static const char *spcmd_w[] = {"w", "st", "-n", "spterm (w)", "-g", "120x34", NULL };
-static const char *spcmd_e[] = {"e", "st", "-n", "spterm (e)", "-g", "120x34", NULL };
+static const char *spcmd_w[] = {"w", "st", "-t", "scratchpad(w)", "-n", "spterm (w)", "-g", "120x34", NULL };
+static const char *spcmd_e[] = {"e", "st", "-t", "scratchpad(e)", "-n", "spterm (e)", "-g", "120x34", NULL };
 static const char *spcmd_r[] = {"r", "kitty", "--name", "spfm (r)", "-e", "ranger", NULL }; //file manager
 static const char *statusclickcmd[] = { NULL, "bin/statusbar/statusclick.sh", NULL };
 
@@ -520,11 +531,11 @@ static const char *passmenucmd[] = { "passmenu2",
 
 //Clipboard buffer
 static const char *clipmenucmd[] = { "clipmenu",
-    "-fn", dmenufont,
-    "-nb", dmenunormbgcolor,
-    "-nf", dmenunormfgcolor,
-    "-sb", dmenuselbgcolor,
-    "-sf", dmenuselfgcolor,
+    // "-fn", dmenufont,
+    // "-nb", dmenunormbgcolor,
+    // "-nf", dmenunormfgcolor,
+    // "-sb", dmenuselbgcolor,
+    // "-sf", dmenuselfgcolor,
     NULL
 };
 
@@ -535,9 +546,10 @@ static Key keys[] = {
     { KeyPress, MODKEY|Shift,       XK_p,            spawn,                CMD("screenshot") },         //screenshot focused window
     { KeyPress, MODKEY|Alt|Shift,   XK_p,            spawn,                CMD("screenshot s") },       //screenshot focused window
     { KeyPress, MODKEY|Shift,       XK_n,            spawn,                {.v = nm_dmenucmd } },       //NM applet dmenu
-    { KeyPress, MODKEY,             XK_c,            spawn,                {.v = clipmenucmd } },       //clipboard buffer dmenu
+    { KeyPress, MODKEY|Shift,       XK_c,            spawn,                CMD("clipmenu") },       //clipboard buffer dmenu
     { KeyPress, MODKEY,             XK_p,            spawn,                {.v = passmenucmd } },       //pass dmenu
     { KeyPress, MODKEY,             XK_d,            spawn,                {.v = dmenucmd } },          // spawn dmenu for launching other programs
+    { KeyPress, MODKEY,             XK_c,            spawn,                SHCMD("rofi -show drun") },          // spawn dmenu for launching other programs
     { KeyPress, MODKEY,             XK_Return,       spawn,                {.v = termcmd } },           // spawn a terminal
     { KeyPress, MODKEY|Shift,       XK_Return,       riospawn,             {.v = termcmd } },           // draw/spawn a terminal
     { KeyPress, MODKEY,             XK_b,            togglebar,            {0} },                       // toggles the display of the bar(s) on the current monitor

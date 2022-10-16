@@ -32,7 +32,7 @@ if ${colorize} ; then
     export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
     alias grep='grep --color=always'
-    alias egrep='egrep --colour=always'
+    alias egrep='grep -E'
     alias fgrep='fgrep --colour=always'
     alias diff='diff --color=always'
     alias ls='ls --color=always'

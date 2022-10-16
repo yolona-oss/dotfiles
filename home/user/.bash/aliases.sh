@@ -15,6 +15,8 @@ alias lsg='logo-ls -D'
 alias lag='logo-ls -AD'
 alias llg='logo-ls -alD'
 
+alias egrep="grep -E"
+
 # Moving
 alias ..='cd ..'
 alias ...='cd ../..'

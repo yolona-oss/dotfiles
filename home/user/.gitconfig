@@ -3,6 +3,7 @@
 	email = siisgoo@mail.ru
 [core]
 	editor = nvim
+	longpaths = true
 [init]
 	defaultBranch = main
 [credential]
